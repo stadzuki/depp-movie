@@ -1,0 +1,161 @@
+@import "./assets/styles/main.scss";
+
+body {
+  font-family: 'Montserrat', Arial, Calibri sans-serif;
+  font-size: 14px;
+  background: #000000;
+  font-weight: 400;
+  font-style: normal;
+  color: #FFFFFF;
+  line-height: 22px;
+  margin: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', Arial, Calibri sans-serif;
+  font-style: normal;
+}
+
+a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+li {
+  list-style: none;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.active {
+  display: block !important;
+}
+
+.hide {
+  display: none !important;
+}
+
+.main-container {
+  max-width: 1344px;
+  margin: 0 auto;
+}
+
+.link {
+  &--active {
+    opacity: .7;
+  }
+}
+
+.dp-text {
+  &__blue {
+    color: #33A4FF;
+  }
+}
+
+.dp-button {
+  &__default {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+  }
+
+  &__color {
+    &--orange {
+      background: linear-gradient(91.78deg, #F38713 0%, #DE5C09 100%);
+    }
+
+    &--blue {
+      background: linear-gradient(91.78deg, #92C4FA 0%, #6B83D8 100%);
+    }
+
+    &--light-blue {
+      background: #5882CF;
+    }
+
+    &--gray {
+      background: #171717;
+    }
+  }
+}
+
+.overlay {
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .6);
+}
+
+.form {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+
+  &__input {
+    background: none;
+    padding: 20px 0px 20px 20px;
+    border: 1px solid #333333;
+    margin-bottom: 16px;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+
+    &::placeholder {
+      color: #FFFFFF;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+    }
+
+    &__error {
+      border: 1px solid rgba(191, 52, 52, 0.3);
+    }
+  }
+
+  &__input-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+
+    .form__input {
+      margin-bottom: 0px;
+
+      &__error-message {
+        display: none;
+        margin-top: 2px;
+        line-height: 19px;
+        font-weight: 500;
+        font-size: 12px;
+        color: #BF3434;
+      }
+    }
+  }
+
+  &__error-message {
+    display: none;
+    text-align: center;
+    color: #BF3434;
+    margin-bottom: 15px;
+  }
+}

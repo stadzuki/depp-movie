@@ -1,0 +1,99 @@
+.modal-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 15%;
+}
+
+.modal {
+  z-index: 1001;
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: #191919;
+  padding: 40px 0;
+  width: 432px;
+  margin: auto;
+
+  &__container {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    text-align: center;
+    font-weight: 600;
+    font-size: 36px;
+  }
+
+  &__description {
+    margin-top: 32px;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+  }
+
+  &__social-list {
+    margin-top: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__item {
+      cursor: pointer;
+      margin-right: 12px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__or-separator {
+    margin-top: 24px;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    line-height: 20px;
+  }
+
+  &__login-button {
+    margin-top: 16px;
+    padding: 20px 0;
+  }
+
+  &__auth-bottom {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+
+    &__button {
+      cursor: pointer;
+      
+      &::after {
+        content: '|';
+        color: #FFFFFF;
+        margin: 0px 12px;
+        opacity: 0.5;
+      }
+
+      &:last-child {
+        &::after {
+          content: '';
+          display: none;
+        }
+      }
+    }
+  }
+
+  &__convention {
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 20px;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+  }
+}

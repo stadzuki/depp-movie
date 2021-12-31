@@ -1,0 +1,50 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 40px;
+
+  &__logo {
+    display: inherit;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+
+    &__item {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 22px;
+      margin-right: 30px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &:hover {
+        opacity: .7;
+      }
+    }
+  }
+
+  &__propose-project {
+    cursor: pointer;
+    font-weight: 300;
+    font-size: 18px;
+  }
+
+  &__user-controls {
+    display: flex;
+    align-items: center;
+
+    &__item {
+      margin-right: 35px;
+      cursor: pointer;
+
+      &:last-child {
+        margin-right: 0px;
+      }
+    }
+  }
+}

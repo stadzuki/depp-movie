@@ -1,0 +1,27 @@
+.footer {
+  padding: 24px 0;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  &__nav {
+    display: flex;
+    align-items: center;
+
+    &__item {
+      font-size: 12px;
+      line-height: 15px;
+      margin-right: 16px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &--opacity {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+}
