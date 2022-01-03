@@ -3,9 +3,26 @@
   align-items: center;
   justify-content: space-between;
   margin-top: 40px;
+  transition: all .3s ease-in-out;
+
+  &--sticky {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    margin: 0;
+    justify-content: space-around;
+    padding: 14px 0;
+    background: #000000;
+    transition: all .3s ease-in-out;
+  }
 
   &__logo {
     display: inherit;
+
+    img {
+      display: block;
+    }
   }
 
   &__nav {
@@ -44,6 +61,10 @@
 
       &:last-child {
         margin-right: 0px;
+      }
+
+      img {
+        display: block;
       }
     }
   }

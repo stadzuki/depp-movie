@@ -1,17 +1,60 @@
 import {NavLink} from "react-router-dom";
 import './header.scss';
 import AuntificateModal from "../Modals/AuntificateModal";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
+import AuthService from "../../services/auth";
 
 function Header () {
+    const [isHeaderSticky, setHeaderSticky] = useState(false);
     const isUserAuth = useSelector((store) => store.user.isAuth);
     const [isAuntificateModalShow, setAuntificateModalShow] = useState(false);
+
+    const headerImg = useRef();
+
+    useEffect(() => {
+        window.addEventListener('scroll', checkHeaderSticky);
+        return () => {
+            window.removeEventListener('scroll', checkHeaderSticky);
+        };
+    });
+
+    function checkHeaderSticky () {
+        const header = document.querySelector('.header');
+        const scrollTop = window.scrollY;
+
+        if (scrollTop >= 5) {
+            header.classList.remove('main-container')
+            header.classList.add('header--sticky')
+
+            //change img
+            headerImg.current.src="/img/logo-small.svg"
+            headerImg.current.width = 27;
+            headerImg.current.height = 36;
+        } else {
+            header.classList.add('main-container')
+            header.classList.remove('header--sticky')
+
+            //change img
+            headerImg.current.src="/img/logo-big.svg"
+            headerImg.current.width = 110;
+            headerImg.current.height = 81;
+        }
+    }
 
     function onProfileClick () {
         if (!isUserAuth) {
             return showLoginModal();
         }
+
+        AuthService.testCock()
+            .then((response) => {
+                console.log('test cokc', response)
+                console.log('авторизован');
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     };
 
     function showLoginModal () {
@@ -22,8 +65,7 @@ function Header () {
         <header className="header main-container">
             <div className="header__logo header__logo-wrapper">
                 <NavLink to="/">
-                    <img className="header__logo-img header__logo--big" src="/img/logo-big.svg" alt="Deep movie" width="110" height="81"/>
-                    {/*<img className="header__logo-img header__logo--small" src="" alt="Deep movie" width="27" height="36"/>*/}
+                    <img ref={headerImg} className="header__logo-img header__logo--big" src="/img/logo-big.svg" alt="Deep movie" width="110" height="81"/>
                 </NavLink>
             </div>
             <ul className="header__nav">
