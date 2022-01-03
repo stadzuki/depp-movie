@@ -1,8 +1,9 @@
-import $api from "../http/http";
+import axios from "axios";
+import {API_URL} from "../http/http";
 
 class FilmService {
     static async getFilms () {
-        return $api.get('api/film/films')
+        return axios.get(`${API_URL}/api/film/films`)
     }
 }
 

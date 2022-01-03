@@ -15,7 +15,7 @@ function AppLoading () {
                     dispatch(actions.changeUserAuntification(true))
                 })
                 .catch((error) => {
-                    console.error(error);
+                    console.error('auntification error', error);
                 })
         }
     }, [])

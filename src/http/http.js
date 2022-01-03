@@ -1,7 +1,7 @@
 import axios from "axios"
 import axiosRetry from "axios-retry";
 
-export const API_URL = 'https://0b90-95-10-3-29.ngrok.io/'
+export const API_URL = 'https://ca34-95-10-3-29.ngrok.io'
 
 const $api = axios.create({
     // withCredentials: true,
@@ -9,7 +9,7 @@ const $api = axios.create({
 });
 
 $api.interceptors.request.use((config) => {
-    // config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
     return config;
 })
 axiosRetry($api, {

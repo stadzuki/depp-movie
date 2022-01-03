@@ -35,7 +35,7 @@ function AuntificateModal ({onCloseModal}) {
     function onLoginClick () {
         AuthService.login(userLogin, userPassword)
             .then((response) => {
-                localStorage.setItem('token', response.data.token);
+                console.log('auth resp', response)
                 dispatch(actions.changeUserAuntification(true))
             })
             .catch((error) => {
@@ -85,8 +85,8 @@ function AuntificateModal ({onCloseModal}) {
                         </ul>
                         <p className="modal__or-separator">Или</p>
                         <form className="form">
-                            <input className="form__input" type="text" placeholder="Почта"/>
-                            <input className="form__input form__input__error" type="password" placeholder="Пароль"/>
+                            <input className="form__input" type="text" placeholder="Почта" value={userLogin}/>
+                            <input className="form__input form__input__error" type="password" placeholder="Пароль" value={userPassword}/>
                             <p className="form__error-message">Почта или пароль не верны</p>
                             <button className="modal__login-button form__button dp-button__default dp-button__color--light-blue" onClick={onLoginClick}>Войти</button>
                         </form>
