@@ -34,11 +34,11 @@ function FilmCard ({currentFilm}) {
                 </div>
                 <div className="movie-info-wrapper">
                     <div className="film-card__title">
-                        <p className="film-card__title__text">{currentFilm.title}</p>
+                        <p className="film-card__title__text">{currentFilm.title || 'Название фильма'}</p>
                         <p className="film-card__title__sub">
-                            <span className="film-card__title__sub--year">{currentFilm.year}</span>
+                            <span className="film-card__title__sub--year">{currentFilm.year || '2058'}</span>
                             <span className="film-card__title__sub--genre">Драма, детектив</span>
-                            <span className="film-card__title__sub--duration">{currentFilm.minutes}</span>
+                            <span className="film-card__title__sub--duration">{currentFilm.minutes || '5 ч 52 мин'}</span>
                         </p>
                     </div>
                     <div className={`film-card__action-buttons ${filmViewState === 'single' ? 'hide' : ''}`}>

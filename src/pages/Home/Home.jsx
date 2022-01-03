@@ -4,7 +4,7 @@ import * as actions from "../../store/actions/user";
 
 import Header from "../../components/Header/Header";
 import FilmCard from "./components/FilmCard/FilmCard";
-import FilmStrip from "./components/FilmStrip";
+import FilmStrip from "./components/FilmStrip/FilmStrip";
 import Footer from "../../components/Footer/Footer";
 
 import "./home.scss";
@@ -110,6 +110,7 @@ function Home () {
                     </div>
                 </div>
             </div>
+            {/*<div style={{height: '200px'}}>123</div>*/}
             <Footer />
         </>
     );
