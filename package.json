@@ -11,14 +11,20 @@
     "node-sass": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-facebook-login": "^4.1.1",
+    "react-google-login": "^5.2.2",
+    "react-perfect-scrollbar": "^1.5.8",
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "5.0.0",
+    "react-twitter-auth": "0.0.13",
+    "react-vk-auth": "0.0.2",
+    "react-wechat-login": "^1.1.1",
     "redux": "^4.1.2",
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set HTTPS=true&&react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -40,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.16.7"
   }
 }
