@@ -1,0 +1,22 @@
+.film-reviews {
+  width: 100%;
+  margin: 0 auto;
+
+  &__items {
+    margin: 60px auto;
+
+    &__item {
+      display: flex;
+
+      &__logo {
+        margin-right: 22px;
+        width: 90px;
+        height: 90px;
+
+        .img-in-block {
+          object-fit: contain;
+        }
+      }
+    }
+  }
+}
