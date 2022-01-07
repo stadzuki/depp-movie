@@ -3,7 +3,16 @@
   align-items: center;
   justify-content: space-between;
   margin-top: 40px;
-  transition: all .3s ease-in-out;
+
+  &__logo {
+    .header__logo__img--small {
+      display: none;
+    }
+
+    img {
+      display: block;
+    }
+  }
 
   &--sticky {
     position: sticky;
@@ -13,15 +22,19 @@
     margin: 0;
     justify-content: space-around;
     padding: 14px 0;
-    background: #000000;
+    background: #000;
     transition: all .3s ease-in-out;
-  }
 
-  &__logo {
-    display: inherit;
+    .header__logo__img {
+      display: none;
 
-    img {
-      display: block;
+      &--small {
+        display: block;
+      }
+
+      &--big {
+        display: none;
+      }
     }
   }
 
