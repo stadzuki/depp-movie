@@ -1,7 +1,7 @@
 import {useEffect} from "react";
-import AuthService from "./services/auth";
-import * as actions from "./store/actions/user";
 import {useDispatch} from "react-redux";
+import * as action from "./store/actions/user";
+import AuthService from "./services/auth";
 
 function AppLoading () {
     const dispatch = useDispatch();
@@ -10,13 +10,13 @@ function AppLoading () {
         const token = localStorage.getItem('token');
         if (token) {
             AuthService.checkIfTokenAvaliable(token)
-                .then((response) => {
-                    localStorage.setItem('token', response.data.token);
-                    dispatch(actions.changeUserAuntification(true))
+                .then(async (response) => {
+                    dispatch(action.changeUserAuntification(true));
                 })
                 .catch((error) => {
-                    console.error('auntification error', error);
+                    console.log('registation by google failed', error);
                 })
+
         }
     }, [])
 
