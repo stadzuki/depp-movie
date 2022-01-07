@@ -6,43 +6,23 @@ class AuthService {
         return $api.post(`${API_URL}/api/user/login`, {login, password})
     }
 
-    static async checkIfTokenAvaliable (token) {
-        return $api.post('/some_url', {token})
+    static async checkIfTokenAvaliable () {
+        return $api.get('/api/user/credentials');
     }
 
     static async registration (login, password, email) {
         return axios.post(`${API_URL}/api/user/register`, {login, password, email})
     }
 
-    static async testCock () {
-        return $api.get(`${API_URL}/api/Film/test`)
-    }
-
     static async registrationByGoogle ({accessToken}) {
-        axios.get(`${API_URL}/api/user/google`, {
-            headers: {
-                'Authorization': accessToken
-            }
-        })
-        .then((response) => {
-            console.log('resp', response)
-        })
-        .catch((error) => {
-            console.log('erro', error)
-        })
+        return axios.get(`${API_URL}/api/user/google`, {
+            headers: {'Authorization': accessToken}
+        });
     }
 
     static async registrationByFacebook ({accessToken}) {
-        axios.get(`${API_URL}/api/user/facebook`, {
-            headers: {
-                'Authorization': accessToken
-            }
-        })
-        .then((response) => {
-            console.log('resp', response)
-        })
-        .catch((error) => {
-            console.log('erro', error)
+        return axios.get(`${API_URL}/api/user/facebook`, {
+            headers: {'Authorization': accessToken}
         })
     }
 
