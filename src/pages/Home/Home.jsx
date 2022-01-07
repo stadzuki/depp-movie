@@ -12,7 +12,9 @@ import FilmService from "../../services/film";
 
 function Home () {
     const dispatch = useDispatch();
-    const filmViewState = useSelector((store) => store.user.filmView);
+    const userInfo = useSelector((store) => store.user);
+    const filmViewState = userInfo.filmView;
+    const isAuth = userInfo.isAuth;
 
     const homeEl = useRef(null);
     const filmsFullViewEl = useRef(null);
@@ -106,11 +108,10 @@ function Home () {
                         <FilmCard currentFilm={mainFilm}></FilmCard>
                     </div>
                     <div className="home__film-strip-container">
-                        <FilmStrip></FilmStrip>
+                        <FilmStrip films={films}></FilmStrip>
                     </div>
                 </div>
             </div>
-            {/*<div style={{height: '200px'}}>123</div>*/}
             <Footer />
         </>
     );
