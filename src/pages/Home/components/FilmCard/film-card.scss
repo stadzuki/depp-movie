@@ -12,9 +12,14 @@
       height: 626px;
     }
 
-    img { width: 100%; }
+    &__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
     &__type {
+      z-index: 1;
       padding: 10px 12px;
       display: flex;
       position: absolute;
@@ -68,13 +73,16 @@
     flex-direction: row;
     flex-wrap: nowrap;
 
-    &__button {
+    a {
       margin-right: 8px;
-      padding: 17px 0px 19px;
 
       &:last-child {
         margin-right: 0;
       }
+    }
+
+    &__button {
+      padding: 17px 0px 19px;
 
       &:hover {
         opacity: .8;
@@ -123,6 +131,7 @@
     width: auto;
     margin-top: 23px;
     justify-content: center;
+    margin-bottom: 60px;
 
     &:hover {
       opacity: .8;
@@ -165,7 +174,23 @@
     width: 318px;
     flex-wrap: wrap;
     margin-bottom: 23px;
-    &__button {
+  }
+
+  .navlink-button {
+    display: block;
+    height: 56px;
+
+    &--main-btn {
+      width: 100%;
+      margin-right: 0;
+    }
+
+    &--secondary-btn {
+      width: 48.7%;
+      margin-top: 8px;
+    }
+
+    .film-card__action-buttons__button {
       margin-right: 8px;
       padding: 17px 0px 19px;
 
@@ -174,11 +199,13 @@
       }
 
       &--more {
-        width: 48.7%;
+        width: 100%;
+        margin-bottom: 0;
       }
 
       &--extra {
-        width: 48.7%;
+        width: 100%;
+        margin-bottom: 0 !important;
       }
 
       &:first-child {
