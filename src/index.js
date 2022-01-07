@@ -10,7 +10,7 @@ import AppLoading from "./AppLoading";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-        {/*<AppLoading/>*/}
+        <AppLoading/>
         <AppRouting/>
     </Provider>
   </React.StrictMode>,
