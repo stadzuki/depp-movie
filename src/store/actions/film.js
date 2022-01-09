@@ -5,6 +5,11 @@ export const setFilms = (payload) => ({
     payload
 });
 
+export const setMainFilm = (payload) => ({
+    type: constants.SET_MAIN_FILM,
+    payload
+});
+
 export const addFIlmInfo = (payload) => ({
     type: constants.ADD_FILMS_INFO,
     payload

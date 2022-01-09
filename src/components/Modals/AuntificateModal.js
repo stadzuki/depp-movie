@@ -20,7 +20,7 @@ function AuntificateModal ({onCloseModal}) {
 
     function onRegistrationModalClose () {
         setRegistrationModalShow(false);
-        onCloseModal(false)
+        if (onCloseModal) onCloseModal(false);
     }
 
     function onResetPasswordClick () {
@@ -29,13 +29,12 @@ function AuntificateModal ({onCloseModal}) {
 
     function onResetPasswordModalClose () {
         setResetPasswordModalShow(false);
-        onCloseModal(false)
+        if (onCloseModal) onCloseModal(false);
     }
 
     function onLoginClick () {
         AuthService.login(userLogin, userPassword)
             .then((response) => {
-                console.log('auth resp', response)
                 dispatch(actions.changeUserAuntification(true))
             })
             .catch((error) => {
@@ -62,7 +61,7 @@ function AuntificateModal ({onCloseModal}) {
 
         return (
             <div className="modal-wrapper">
-                <div className="overlay" onClick={() => onCloseModal(false)}></div>
+                <div className="overlay" onClick={() => {if (onCloseModal) onCloseModal(false)}}></div>
                 <div className="modal">
                     <div className="modal__container">
                         <p className="modal__title">Вход</p>

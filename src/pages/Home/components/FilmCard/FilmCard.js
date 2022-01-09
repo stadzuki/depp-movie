@@ -1,32 +1,65 @@
 import {useSelector} from "react-redux";
 import "./film-card.scss"
 import FilmStep from "../FilmStep/FilmStep";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {NavLink} from "react-router-dom";
+import {textEditor} from "../../../../utils/textEditor";
 
-function FilmCard ({currentFilm}) {
-    const filmViewState = useSelector((store) => store.user.filmView)
-    const [isFilmStepShow,setFilmStepShow] = useState(false)
+function FilmCard () {
+    // const currentFilm = useSelector((store) => store.film.mainFilm);
+    const filmViewState = useSelector((store) => store.user.filmView);
+    const [isTextExpand, setTextExpand] = useState(true);
+    const [isFilmStepShow, setFilmStepShow] = useState(false);
 
-    // currentFilm = {id: 1}
+    const currentFilm = {id: 1, description: "История об отважном львенке по имени Симба. Знакомые с детства герои взрослеют, влюбляются, познают себя и окружающий мир, совершают ошибки и делают правильный выбор История об отважном львенке по имени Симба. Знакомые с детства герои взрослеют, влюбляются, познают себя и окружающий мир, совершают ошибки и делают правильный выбор."}
 
     function onFilmStepClick (status) {
         setFilmStepShow(status);
+    }
+
+    function changeExpandText (evt) {
+        const target = evt.currentTarget;
+
+        setTextExpand((prev) => !prev);
+
+        if (!isTextExpand) {
+            target.textContent = 'Далее';
+            target.classList.remove('dp-text__blue--arrow-down__reverse');
+        } else {
+            target.textContent = 'Скрыть';
+            target.classList.add('dp-text__blue--arrow-down__reverse');
+        }
+    }
+
+    function expandText () {
+        if (currentFilm.description) {
+            const expandedText = textEditor(currentFilm.description);
+
+            if (isTextExpand) return expandedText?.editStr || expandedText.originalStr;
+
+            return expandedText.originalStr;
+        }
+
+        return currentFilm.description;
     }
 
     return (
         <>
             <div className="film-card">
                 <div className={`film-card__movie ${filmViewState === 'single' ? 'film-card__movie--film-view-max' : ''}`}>
-                    <div className="film-card__movie__type">
-                        <img src="/img/bolt.svg" alt="bolt" width="20" height="20"/>
-                        <span>Иммерсивный</span>
-                    </div>
+                    {currentFilm.isImmersive
+                        ? <div className="film-card__movie__type">
+                            <img src="/img/bolt.svg" alt="bolt" width="20" height="20"/>
+                            <span>Иммерсивный</span>
+                        </div>
+                        : ''
+                    }
                     {currentFilm.posterURL
                         ? <img className="film-card__movie__img" src={currentFilm.posterURL}/>
                         : <div className="img__pulg">
-                            <img src="/img/broken-file.svg" alt="broken image" width="75"/>
-                        </div>}
+                            <img src="/img/broken-file.svg" alt="broken" width="75"/>
+                        </div>
+                    }
                 </div>
                 <div className="movie-info">
                     <div className={`movie-info-full-view ${filmViewState === 'single' ? 'active' : ''}`}>
@@ -95,10 +128,13 @@ function FilmCard ({currentFilm}) {
                         </div>
                         <div className="film-card__description">
                             <p className="film-card__description__text">
-                                {currentFilm.description || 'Описание...'}
-                                <span className="film-card__description__text__show-more dp-text__blue">Далее
-                            <img src="/img/arrow-down.svg" alt="arrow down" width="10" height="11"/>
-                        </span>
+                                {expandText() || 'Описание...'}
+                                <span
+                                    className="film-card__description__text__show-more dp-text__blue dp-text__blue--arrow-down"
+                                    onClick={(evt) => changeExpandText(evt)}
+                                >
+                                    Далее
+                                </span>
                             </p>
                         </div>
                         <div

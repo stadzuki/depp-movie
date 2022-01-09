@@ -1,0 +1,13 @@
+.film-description__official-res {
+  &::after {
+    content: '•';
+    margin: 0px 4px;
+  }
+
+  &:last-child {
+    &::after {
+      content: '';
+      display: none;
+    }
+  }
+}

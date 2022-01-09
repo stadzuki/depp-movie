@@ -1,43 +1,61 @@
-import PerfectScrollbar from "react-perfect-scrollbar";
 import {Link, NavLink} from "react-router-dom";
-import "./film-info.scss"
 import {useEffect, useState} from "react";
+import PerfectScrollbar from "react-perfect-scrollbar";
+
+import "./film-info.scss"
 
 function FilmInfo ({film}) {
-    const [filmInfo, setFilmInfo] = useState({})
+    const line = [
+        {type: 'video', url: 'https://www.youtube.com/watch?v=QBWCIKDsV6M&list=RDMMQBWCIKDsV6M&start_radio=1', poster: '/img/film-mock.svg'},
+        {type: 'image', url: '/img/film-mock.svg', poster: '/img/film-mock.svg'},
+        {type: 'image', url: '/img/film-mock.svg', poster: '/img/film-mock.svg'},
+        {type: 'image', url: '/img/film-mock.svg', poster: '/img/film-mock.svg'},
+        {type: 'image', url: '/img/film-mock.svg', poster: '/img/film-mock.svg'},
+    ];
+
+    const [filmInfo, setFilmInfo] = useState({});
+    const [posterInfo, setPosterInfo] = useState(line[0])
 
     useEffect(() => {
-        setFilmInfo(film)
+        if (film) setFilmInfo(film)
     }, [film])
+
+    function onLineItemClick (evt, lineItem) {
+        const target = evt.currentTarget;
+        const lineItems = target.parentNode.childNodes;
+
+        lineItems.forEach(item => item.classList.remove('gallery-line__item--active'));
+        target.classList.add('gallery-line__item--active');
+
+        setPosterInfo(lineItem);
+    }
 
     return (
         <div className="film-info main-container">
             <div className="film-info__gallery">
                 <div className="film-info__gallery__screen">
-                    <img src="/img/film-mock.svg" className="img-in-block" alt="film"/>
-                    <div className="film-info__gallery__screen__play film-play-icon"></div>
+                    {posterInfo.type === 'video'
+                        ? <video src={posterInfo.url} poster={posterInfo?.poster} controls={true} className="img-in-block">
+                            Ваш браузер не поддерживает видео
+                        </video>
+                        : <img src={posterInfo.url} className="img-in-block" alt="film"/>
+                    }
                 </div>
                 <div className="film-info__gallery__line gallery-line">
                     <PerfectScrollbar>
                         <ul className="gallery-line__items">
-                            <li className="gallery-line__item">
-                                <img src="/img/film-mock.svg" className="img-in-block" alt="film picture"/>
-                            </li>
-                            <li className="gallery-line__item">
-                                <img src="/img/film-mock.svg" className="img-in-block" alt="film picture"/>
-                            </li>
-                            <li className="gallery-line__item">
-                                <img src="/img/film-mock.svg" className="img-in-block" alt="film picture"/>
-                            </li>
-                            <li className="gallery-line__item">
-                                <img src="/img/film-mock.svg" className="img-in-block" alt="film picture"/>
-                            </li>
-                            <li className="gallery-line__item">
-                                <img src="/img/film-mock.svg" className="img-in-block" alt="film picture"/>
-                            </li>
-                            <li className="gallery-line__item">
-                                <img src="/img/film-mock.svg" className="img-in-block" alt="film picture"/>
-                            </li>
+                            {line.map((item, idx) => {
+                                return (
+                                    <li
+                                        key={idx}
+                                        className={`gallery-line__item ${idx === 0 ? 'gallery-line__item--active' : ''}`}
+                                        onClick={(evt) => onLineItemClick(evt,  item)}
+                                    >
+                                        <img src={item.poster} className="img-in-block" alt="film"/>
+                                        {item.type === 'video' ? <div className="film-info__gallery__screen__play film-play-icon film-play-icon--mini"></div> : ''}
+                                    </li>
+                                )
+                            })}
                         </ul>
                     </PerfectScrollbar>
                 </div>

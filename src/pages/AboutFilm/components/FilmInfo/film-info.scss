@@ -38,6 +38,7 @@
         }
 
         &__item {
+          position: relative;
           cursor: pointer;
           flex-shrink: 0;
           margin-right: 8px;
@@ -45,6 +46,12 @@
           max-height: 84px;
           width: 100%;
           height: 100%;
+
+          &--active {
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+            border: 1px solid #FFFFFF;
+            box-sizing: content-box;
+          }
 
           &:last-child {
             margin-right: 0;

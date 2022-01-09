@@ -6,7 +6,13 @@
     margin: 60px auto;
 
     &__item {
+      margin-top: 60px;
+      max-width: 770px;
       display: flex;
+
+      &:first-child {
+        margin-top: 0;
+      }
 
       &__logo {
         margin-right: 22px;

@@ -1,6 +1,8 @@
 import {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import * as actions from "../../store/actions/user";
+import * as filmActions from "../../store/actions/film";
+import FilmService from "../../services/film";
 
 import Header from "../../components/Header/Header";
 import FilmCard from "./components/FilmCard/FilmCard";
@@ -8,22 +10,15 @@ import FilmStrip from "./components/FilmStrip/FilmStrip";
 import Footer from "../../components/Footer/Footer";
 
 import "./home.scss";
-import FilmService from "../../services/film";
 
 function Home () {
     const dispatch = useDispatch();
     const userInfo = useSelector((store) => store.user);
     const filmViewState = userInfo.filmView;
-    const isAuth = userInfo.isAuth;
 
     const homeEl = useRef(null);
     const filmsFullViewEl = useRef(null);
     const filmsMinViewEl = useRef(null);
-
-    // временно потом перенести в store или сделать по компонента. ВСЕ ХУНЯ СЛУШАЙ КАК НАДО
-    // ЧТОБЫ НЕ ДЕЛАТЬ ЛИШНИХ ЗАПРОСОВ, ДЕЛАЕМ ЗАПРОС ТУТ, ВСЮ ДАТУ КОТОРАЯ ЕСТЬ ЕБАШИМ В СТОР А ПОТОМ В КОМПОНЕНТАХ БЕРЕМ ТО ЧТО НАМ НАДО ВОУ ЛЯ
-    const [mainFilm, setMainFilm] = useState({});
-    const [films, setFilms] = useState([]);
 
     useEffect(function () {
         loadFilmsData();
@@ -37,8 +32,8 @@ function Home () {
         FilmService.getFilms()
             .then((response) => {
                 if (response.data.length) {
-                    setFilms(response.data);
-                    setMainFilm(response.data[0]);
+                    dispatch(filmActions.setFilms(response.data));
+                    dispatch(filmActions.setMainFilm(response.data[0]));
                 }
             })
             .catch((error) => {
@@ -105,10 +100,10 @@ function Home () {
                 </div>
                 <div className="home__content">
                     <div className="home__film-card-container">
-                        <FilmCard currentFilm={mainFilm}></FilmCard>
+                        <FilmCard></FilmCard>
                     </div>
                     <div className="home__film-strip-container">
-                        <FilmStrip films={films}></FilmStrip>
+                        <FilmStrip></FilmStrip>
                     </div>
                 </div>
             </div>

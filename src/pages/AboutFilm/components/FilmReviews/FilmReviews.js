@@ -1,25 +1,37 @@
 import "./film-reviews.scss"
+import {useEffect, useState} from "react";
 
-function FilmReviews () {
+function FilmReviews ({film}) {
+    const [filmInfo, setFilmInfo] = useState({reviews: []});
+
+    useEffect(() => {
+        if (film) setFilmInfo(film)
+    }, [film])
+
     return (
         <div className="film-reviews info-content">
-            <ul className="film-reviews__items">
-                <li className="film-reviews__items__item">
-                    <div className="film-reviews__items__item__logo">
-                        <img src="/img/mock-reviews.svg" className="img-in-block" alt="review company logo"/>
-                    </div>
-                    <div className="info-content__inner__block info-content__inner__block--without-margin" id="plot">
-                        <p className="info-content__inner__block__under-title">Милослав Чемоданов, The Village</p>
-                        <p className="info-content__inner__block__title">Трёхчасовой эпос</p>
-                        <p className="info-content__inner__block__description info-content__inner__block__description--mx-550">
-                            Впрочем, Ноланы мало ориентируются на зрителя, которому становится скучно,
-                            как только заканчивается попкорн. Они снимают великое кино, которое запихивать
-                            в 90-минутный формат практически невозможно и точно незачем.
-                        </p>
-                        <a href="#" className="dp-button__action">Полная рецензия</a>
-                    </div>
-                </li>
-            </ul>
+            {filmInfo.reviews.length
+                ? <ul className="film-reviews__items">
+                    {filmInfo.reviews.map((review, idx) => {
+                        return (
+                            <li key={idx} className="film-reviews__items__item">
+                                <div className="film-reviews__items__item__logo">
+                                    <img src={review?.imageURL} className="img-in-block" alt="review company logo"/>
+                                </div>
+                                <div className="info-content__inner__block info-content__inner__block--without-margin">
+                                    <p className="info-content__inner__block__under-title">{review.label}</p>
+                                    <p className="info-content__inner__block__title">{review.title}</p>
+                                    <p
+                                        className="info-content__inner__block__description info-content__inner__block__description--mx-550"
+                                    >{review.description}</p>
+                                    <a href={review.link} className="dp-button__action">Полная рецензия</a>
+                                </div>
+                            </li>
+                        )
+                    })}
+                </ul>
+                : <p style={{margin: "50px auto"}}>Не удалось загрузить рецензии или они отсутсвуют</p>
+            }
         </div>
     )
 }

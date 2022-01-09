@@ -4,7 +4,7 @@ function FilmCreator ({film}) {
     const [filmInfo, setFilmInfo] = useState({})
 
     useEffect(() => {
-        setFilmInfo(film)
+        setFilmInfo(film?.creators)
     }, [film])
 
     return (
@@ -23,23 +23,28 @@ function FilmCreator ({film}) {
                 </ul>
             </div>
             <div className="info-content__inner">
-                <div className="info-content__inner__block--flex" id="author">
-                    <p className="info-content__inner__block__title">Автор</p>
-                    {filmInfo?.authors.map((author) => {
-                        return (
-                            <div className="info-content__inner__block__persons">
-                                <div className="info-content__inner__block__person">
-                                    <div className="info-content__inner__block__img">
-                                        <img src="/img/mock-actor.svg" className="img-in-block" alt="person"/>
-                                        {/*<div className="actor-img-plug"></div>*/}
+                {filmInfo.authors.length
+                    ? <div className="info-content__inner__block--flex" id="author">
+                        <p className="info-content__inner__block__title">Автор</p>
+                        {filmInfo.authors.map((person) => {
+                            return (
+                                <div className="info-content__inner__block__persons">
+                                    <div className="info-content__inner__block__person">
+                                        <div className="info-content__inner__block__img">
+                                            {person.photoURL
+                                                ? <img src={person.photoURL} className="img-in-block" alt="person"/>
+                                                : <div className="actor-img-plug"></div>
+                                            }
+                                        </div>
+                                        <a href="#" className="info-content__inner__block__description--actor">{person.fio}</a>
                                     </div>
-                                    <a href="#" className="info-content__inner__block__description--actor">Кристофер Нолан</a>
                                 </div>
-                            </div>
-                        )
-                    })}
+                            )
+                        })}
 
-                </div>
+                    </div>
+                    : ''
+                }
                 {/*<div className="info-content__inner__block--flex" id="plot">*/}
                 {/*    <p className="info-content__inner__block__title">Автор</p>*/}
                 {/*    <div className="info-content__inner__block__persons">*/}

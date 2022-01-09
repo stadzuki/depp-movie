@@ -64,7 +64,7 @@ function RegistrationModal ({onCloseModal, showRegistrationModal, showResetPassw
                 }
             })
             .catch((error) => {
-                console.log('registration error', error)
+                console.error('registration error', error)
             })
     }
 
@@ -90,7 +90,7 @@ function RegistrationModal ({onCloseModal, showRegistrationModal, showResetPassw
                         setUserAuthorize(response);
                     })
                     .catch((error) => {
-                        console.log('registation by google failed', error);
+                        console.error('registation by google failed', error);
                         displayError('Произошла ошибка регистрации через сервис google');
                     })
                 break;
@@ -101,7 +101,7 @@ function RegistrationModal ({onCloseModal, showRegistrationModal, showResetPassw
                         setUserAuthorize(response);
                     })
                     .catch((error) => {
-                        console.log('registation by facebook failed', error);
+                        console.error('registation by facebook failed', error);
                         displayError('Произошла ошибка регистрации через сервис facebook');
                     })
                 break;

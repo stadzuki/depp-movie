@@ -12,7 +12,7 @@
       background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
       filter: blur(200px);
       display: block;
-      width: 680px;
+      width: 50%;
       height: 430px;
       position: absolute;
       top: 0;
@@ -64,7 +64,7 @@
 
   .home__content {
     &::before {
-      width: 1030px;
+      width: 76%;
       height: 660px;
     }
   }

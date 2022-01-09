@@ -4,7 +4,7 @@ function FilmDescription ({film}) {
     const [filmInfo, setFilmInfo] = useState({})
 
     useEffect(() => {
-        setFilmInfo(film)
+        if (film) setFilmInfo(film)
     }, [film])
 
     return (
@@ -37,11 +37,11 @@ function FilmDescription ({film}) {
                         <div className="description-content__left description-content__left--margin">
                             <div className="description-content__wrapper">
                                 <p className="description-content__title">Бюджет</p>
-                                <p className="description-content__subtitle">{filmInfo?.totalBudget || '-'}</p>
+                                <p className="description-content__subtitle">${filmInfo?.totalBudget || '-'}</p>
                             </div>
                             <div className="description-content__wrapper">
                                 <p className="description-content__title">Сборы в мире</p>
-                                <p className="description-content__subtitle">{filmInfo?.totalFees || '-'}</p>
+                                <p className="description-content__subtitle">${filmInfo?.totalFees || '-'}</p>
                             </div>
                             <div className="description-content__wrapper">
                                 <p className="description-content__title">Премьера в мире</p>
@@ -49,17 +49,17 @@ function FilmDescription ({film}) {
                             </div>
                             <div className="description-content__wrapper">
                                 <p className="description-content__title">Возрастной рейтинг</p>
-                                <p className="description-content__subtitle">{filmInfo?.ageRating || '-'}</p>
+                                <p className="description-content__subtitle">{filmInfo?.ageRating || '-'}+</p>
                             </div>
                         </div>
                         <div className="description-content__right">
                             <div className="description-content__wrapper">
                                 <p className="description-content__title">Сборы в США</p>
-                                <p className="description-content__subtitle">{filmInfo?.usaFees || '-'}</p>
+                                <p className="description-content__subtitle">${filmInfo?.usaFees || '-'}</p>
                             </div>
                             <div className="description-content__wrapper">
                                 <p className="description-content__title">Сборы в России</p>
-                                <p className="description-content__subtitle">{filmInfo?.russiaFees || '-'}</p>
+                                <p className="description-content__subtitle">${filmInfo?.russiaFees || '-'}</p>
                             </div>
                             <div className="description-content__wrapper">
                                 <p className="description-content__title">Премьера в России</p>
@@ -67,7 +67,9 @@ function FilmDescription ({film}) {
                             </div>
                             <div className="description-content__wrapper">
                                 <p className="description-content__title">Официальные ресурсы</p>
-                                <p className="description-content__subtitle">ЗАПОЛНИТЬ</p>
+                                <p className="description-content__subtitle">
+                                    <span className="film-description__official-res dp-button__blue dp-button__blue--arrow-link">Сайт</span>
+                                </p>
                             </div>
                         </div>
                     </div>
