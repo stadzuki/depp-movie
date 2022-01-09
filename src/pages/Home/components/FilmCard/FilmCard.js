@@ -6,12 +6,12 @@ import {NavLink} from "react-router-dom";
 import {textEditor} from "../../../../utils/textEditor";
 
 function FilmCard () {
-    // const currentFilm = useSelector((store) => store.film.mainFilm);
+    const currentFilm = useSelector((store) => store.film.mainFilm);
     const filmViewState = useSelector((store) => store.user.filmView);
     const [isTextExpand, setTextExpand] = useState(true);
     const [isFilmStepShow, setFilmStepShow] = useState(false);
 
-    const currentFilm = {id: 1, description: "История об отважном львенке по имени Симба. Знакомые с детства герои взрослеют, влюбляются, познают себя и окружающий мир, совершают ошибки и делают правильный выбор История об отважном львенке по имени Симба. Знакомые с детства герои взрослеют, влюбляются, познают себя и окружающий мир, совершают ошибки и делают правильный выбор."}
+    // const currentFilm = {id: 1, description: "История об отважном львенке по имени Симба. Знакомые с детства герои взрослеют, влюбляются, познают себя и окружающий мир, совершают ошибки и делают правильный выбор История об отважном львенке по имени Симба. Знакомые с детства герои взрослеют, влюбляются, познают себя и окружающий мир, совершают ошибки и делают правильный выбор."}
 
     function onFilmStepClick (status) {
         setFilmStepShow(status);
@@ -145,7 +145,7 @@ function FilmCard () {
                                 <p>Сбор средств</p>
                             </div>
                             <p className="film-card__media-button__percent">
-                                <span className="film-card__media-button__percent__count"> 54% </span>
+                                <span className="film-card__media-button__percent__count"> { currentFilm.percentCollected || '-' + '%'} </span>
                                 собрано
                             </p>
                         </div>

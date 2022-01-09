@@ -15,26 +15,16 @@ import "./about-film.scss"
 import {Redirect} from "react-router-dom";
 
 function AboutFilm ({filmId}) {
-    // const filmId = 1;
-    // const filmInfo = {1: {id: 1}}
-    // let filmId;
-    // if (props.data) {
-    //     filmId = props.data.match.params.id;
-    // } else {
-    //     filmId = props.match.params.id;
-    // }
-    const filmStore = useSelector((store) => store.film.filmsInfo)
+    const filmInfo = useSelector((store) => store.film.filmsInfo)
     const dispatch = useDispatch();
     const navFilmDescRef = useRef();
 
-    const [filmInfo, setFilmInfo] = useState([]);
     const [bottomContent, setBottomContent] = useState('film-description');
 
     useEffect(() => {
         FilmService.getFilm(filmId)
             .then((response) => {
                 dispatch(filmActions.addFIlmInfo({id: response.data.id, data: response.data}))
-                setFilmInfo([{id: response.data.id, data: response.data}]);
             })
             .catch((error) => {
                 console.error('cannot load film info', error)

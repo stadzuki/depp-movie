@@ -16,8 +16,7 @@ function AppRouting () {
     }, [userAuth])
 
     function requireAuth (Component, props) {
-        console.warn('is auth auto load', isAuth);
-        if (!isAuth && !userAuth) return <Redirect to="/account/signin"/>
+        // if (!isAuth && !userAuth) return <Redirect to="/account/signin"/>
 
         return <Component filmId={props.match.params.id}/>
     }

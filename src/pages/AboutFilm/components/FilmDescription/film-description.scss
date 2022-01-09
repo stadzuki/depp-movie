@@ -1,7 +1,19 @@
 .film-description__official-res {
+  position: relative;
+  margin-right: 20px;
+
+  &.dp-text__blue {
+    padding-left: 0;
+  }
+
+  a {
+    color: inherit;
+  }
+
   &::after {
     content: '•';
-    margin: 0px 4px;
+    position: absolute;
+    margin-left: 24px;
   }
 
   &:last-child {

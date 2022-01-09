@@ -1,7 +1,7 @@
 import axios from "axios"
 // import axiosRetry from "axios-retry";
 
-export const API_URL = 'https://14fa-85-106-103-65.ngrok.io'
+export const API_URL = 'https://59e4-88-232-169-74.ngrok.io'
 
 const $api = axios.create({
     // withCredentials: true,

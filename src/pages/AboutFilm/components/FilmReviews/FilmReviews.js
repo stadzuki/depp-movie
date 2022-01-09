@@ -24,7 +24,7 @@ function FilmReviews ({film}) {
                                     <p
                                         className="info-content__inner__block__description info-content__inner__block__description--mx-550"
                                     >{review.description}</p>
-                                    <a href={review.link} className="dp-button__action">Полная рецензия</a>
+                                    <a href={review.link} className="dp-button__action dp-text__blue--arrow-link">Полная рецензия</a>
                                 </div>
                             </li>
                         )

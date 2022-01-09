@@ -82,13 +82,17 @@
 
       .info-content {
         display: flex;
+        position: relative;
+        padding-left: 60px;
 
         &__nav {
-          margin-top: 67px;
-          margin-left: 60px;
+          padding-top: 67px;
+          //margin-top: 67px;
+          //margin-left: 60px;
 
           &__items {
-            position: relative;
+            position: sticky;
+            top: 100px;
 
             &::before {
               content: '';
@@ -134,9 +138,14 @@
             }
 
             &--flex {
+              padding-top: 60px;
               display: flex;
               flex-wrap: wrap;
               flex-direction: column;
+
+              &:first-child {
+                padding-top: 0;
+              }
             }
 
             &__persons {
@@ -184,6 +193,12 @@
                 max-width: 204px;
                 font-size: 14px;
                 line-height: 16px;
+              }
+
+              &--actor-role {
+                text-align: center;
+                margin-top: 5px;
+                opacity: 0.5;
               }
 
               &--mx-550 {

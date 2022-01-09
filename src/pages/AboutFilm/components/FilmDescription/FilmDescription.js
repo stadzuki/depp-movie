@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import "./film-description.scss";
 
 function FilmDescription ({film}) {
     const [filmInfo, setFilmInfo] = useState({})
@@ -68,7 +69,16 @@ function FilmDescription ({film}) {
                             <div className="description-content__wrapper">
                                 <p className="description-content__title">Официальные ресурсы</p>
                                 <p className="description-content__subtitle">
-                                    <span className="film-description__official-res dp-button__blue dp-button__blue--arrow-link">Сайт</span>
+                                    {filmInfo && filmInfo.links
+                                        ? filmInfo?.links.map((link, id) => {
+                                            return (
+                                                <span key={id} className="film-description__official-res dp-text__blue dp-text__blue--arrow-link">
+                                                    <a href={link.url}>{link.title}</a>
+                                                </span>
+                                            )
+                                        })
+                                        : ''
+                                    }
                                 </p>
                             </div>
                         </div>

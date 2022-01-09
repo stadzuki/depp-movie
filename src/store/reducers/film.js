@@ -2,9 +2,9 @@ import * as constants from "../constants/film";
 
 const initialState = {
     films: [
-        {id: 1, title: 'name', year: '2222', categories: 'some'},
-        {id: 2, title: 'name123', year: '222223', categories: 'some2'},
-        {id: 3, title: 'n5ame123', year: '222223', categories: 'some2'},
+        // {id: 1, title: 'name', year: '2222', categories: 'some'},
+        // {id: 2, title: 'name123', year: '222223', categories: 'some2'},
+        // {id: 3, title: 'n5ame123', year: '222223', categories: 'some2'},
     ],
     // mainFilm: this.films[0],
     mainFilm: {},

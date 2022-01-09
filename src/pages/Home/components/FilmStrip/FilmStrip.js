@@ -67,7 +67,7 @@ function FilmStrip () {
                         )
                     })}
                 </ul>
-                : <p style={{textAlign: "center", marginTop: "50%"}}>Не удалось загрузить ленту фильмов</p>
+                : <p style={{textAlign: "center", marginTop: "50%"}}>Загрузка...</p>
             }
         </div>
         </PerfectScrollbar>

@@ -7,7 +7,7 @@ import Loader from "./components/Loader";
 
 function AppLoading (props) {
     const dispatch = useDispatch();
-    const [isAppReady, setAppReady] = useState(false);
+    const [isAppReady, setAppReady] = useState(true);
     const isAuth = useSelector((store) => store.user.isAuth);
 
     useEffect(function () {
@@ -15,6 +15,7 @@ function AppLoading (props) {
         if (token) {
             AuthService.checkIfTokenAvaliable()
                 .then((response) => {
+                    console.log('credo auth', response)
                     dispatch(action.changeUserAuntification(true));
                 })
                 .catch((error) => {

@@ -22,15 +22,13 @@ function Header () {
         const header = headerRef.current;
         const scrollTop = window.scrollY;
 
-        setTimeout(() => {
-            if (scrollTop > 60) {
-                header.classList.remove('main-container')
-                header.classList.add('header--sticky')
-            } else {
-                header.classList.add('main-container')
-                header.classList.remove('header--sticky')
-            }
-        }, 10)
+        if (scrollTop > 120) {
+            header.classList.remove('main-container')
+            header.classList.add('header--sticky')
+        } else if (scrollTop < 5){
+            header.classList.remove('header--sticky')
+            header.classList.add('main-container')
+        }
     }
 
     function onProfileClick () {

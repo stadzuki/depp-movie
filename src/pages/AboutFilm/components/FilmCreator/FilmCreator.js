@@ -1,81 +1,64 @@
 import {useEffect, useState} from "react";
 
 function FilmCreator ({film}) {
-    const [filmInfo, setFilmInfo] = useState({})
+    const [filmInfo, setFilmInfo] = useState([])
 
     useEffect(() => {
-        setFilmInfo(film?.creators)
+        setFilmInfo(film.creators)
     }, [film])
+
+    function navigationClick (evt) {
+        const target = evt.currentTarget;
+        const navChildrens = target.parentNode.childNodes;
+
+        navChildrens.forEach((navItem) => {
+            navItem.classList.remove('nav-active');
+        })
+
+        target.classList.add('nav-active');
+    }
 
     return (
         <div className="film-creator info-content">
             <div className="info-content__nav">
                 <ul className="info-content__nav__items">
-                    <li className="info-content__nav__items__item nav-active">
-                        <a href="#plot">Cюжет</a>
-                    </li>
-                    <li className="info-content__nav__items__item">
-                        <a href="#details">Детали</a>
-                    </li>
-                    <li className="info-content__nav__items__item">
-                        <a href="#immersive_func">Иммерсивные функции</a>
-                    </li>
+                    {filmInfo.map((navItem, id) => {
+                        return (
+                            <li key={id} className={`info-content__nav__items__item ${id === 0 ? 'nav-active' : ''}`} onClick={navigationClick}>
+                                <a href={`#${navItem.id}`}>{navItem.title}</a>
+                            </li>
+                        )
+                    })}
                 </ul>
             </div>
             <div className="info-content__inner">
-                {filmInfo.authors.length
-                    ? <div className="info-content__inner__block--flex" id="author">
-                        <p className="info-content__inner__block__title">Автор</p>
-                        {filmInfo.authors.map((person) => {
+                {filmInfo && filmInfo.length
+                    ?
+                        filmInfo.map((person, id) => {
                             return (
-                                <div className="info-content__inner__block__persons">
-                                    <div className="info-content__inner__block__person">
-                                        <div className="info-content__inner__block__img">
-                                            {person.photoURL
-                                                ? <img src={person.photoURL} className="img-in-block" alt="person"/>
-                                                : <div className="actor-img-plug"></div>
-                                            }
-                                        </div>
-                                        <a href="#" className="info-content__inner__block__description--actor">{person.fio}</a>
+                                <div key={id} className="info-content__inner__block--flex" id={person.id}>
+                                    <p className="info-content__inner__block__title">{person.title}</p>
+                                    <div className="info-content__inner__block__persons">
+                                        {person.data.map((pers, idx) => {
+                                            return (
+                                                <div key={idx} className="info-content__inner__block__person">
+                                                    <div className="info-content__inner__block__img">
+                                                        {pers.photoURL
+                                                            ? <img src={pers.photoURL} className="img-in-block" alt="person"/>
+                                                            : <div className="actor-img-plug"></div>
+                                                        }
+                                                    </div>
+                                                    <a href={pers.url} className="info-content__inner__block__description--actor">{pers.fio}</a>
+                                                    <p className="info-content__inner__block__description--actor-role">{pers.role}</p>
+                                                </div>
+                                            )
+                                        })}
                                     </div>
                                 </div>
                             )
-                        })}
-
-                    </div>
+                        })
                     : ''
                 }
-                {/*<div className="info-content__inner__block--flex" id="plot">*/}
-                {/*    <p className="info-content__inner__block__title">Автор</p>*/}
-                {/*    <div className="info-content__inner__block__persons">*/}
-                {/*        <div className="info-content__inner__block__person">*/}
-                {/*            <div className="info-content__inner__block__img">*/}
-                {/*                <img src="/img/mock-actor.svg" className="img-in-block" alt="person"/>*/}
-                {/*                /!*<div className="actor-img-plug"></div>*!/*/}
-                {/*            </div>*/}
-                {/*            <a href="#" className="info-content__inner__block__description--actor">Кристофер Нолан</a>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-                {/*<div className="info-content__inner__block info-content__inner__block--flex" id="plot">*/}
-                {/*    <p className="info-content__inner__block__title">Сценаристы</p>*/}
-                {/*    <div className="info-content__inner__block__persons">*/}
-                {/*        <div className="info-content__inner__block__person">*/}
-                {/*            <div className="info-content__inner__block__img">*/}
-                {/*                <img src="/img/mock-actor.svg" className="img-in-block" alt="person"/>*/}
-                {/*                /!*<div className="actor-img-plug"></div>*!/*/}
-                {/*            </div>*/}
-                {/*            <a href="#" className="info-content__inner__block__description--actor">Кристофер Нолан</a>*/}
-                {/*        </div>*/}
-                {/*        <div className="info-content__inner__block__person">*/}
-                {/*            <div className="info-content__inner__block__img">*/}
-                {/*                <img src="/img/mock-actor.svg" className="img-in-block" alt="person"/>*/}
-                {/*                /!*<div className="actor-img-plug"></div>*!/*/}
-                {/*            </div>*/}
-                {/*            <a href="#" className="info-content__inner__block__description--actor">Кристофер Нолан</a>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
             </div>
         </div>
     )
