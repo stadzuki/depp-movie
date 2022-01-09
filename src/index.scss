@@ -23,6 +23,17 @@
   //opacity: 1 !important;
 }
 
+.loader {
+  position: absolute;
+  z-index: 1004;
+  left: 0;
+  right: 0;
+  top: 40%;
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+}
+
 body {
   font-family: 'Montserrat', Arial, Calibri sans-serif;
   font-size: 14px;
@@ -96,6 +107,22 @@ ul {
 .dp-text {
   &__blue {
     color: #33A4FF;
+    cursor: pointer;
+    padding-left: 5px;
+
+    &--arrow-down {
+      background: url("/assets/img/arrow-down.svg") no-repeat right;
+      padding-right: 20px;
+
+      &__reverse {
+        background: url("/assets/img/arrow-up.svg") no-repeat right;
+      }
+    }
+
+    &--arrow-link {
+      background: url("/assets/img/arrow-link.svg") no-repeat right;
+      padding-right: 20px;
+    }
   }
 }
 
@@ -256,7 +283,7 @@ ul {
 .film-play-icon {
   cursor: pointer;
   position: absolute;
-  background: transparent url("/assets/img/play.png") center;
+  background: transparent url("/assets/img/play.png") no-repeat center;
   margin: auto;
   width: 75px;
   height: 88px;
@@ -267,6 +294,12 @@ ul {
   bottom: 0;
   right: 0;
   transition: transform .3s;
+
+  &--mini {
+    width: 32px;
+    height: 32px;
+    background-size: contain;
+  }
 
   &:hover {
     transition: transform .3s;
