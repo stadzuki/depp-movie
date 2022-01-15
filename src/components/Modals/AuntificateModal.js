@@ -62,7 +62,7 @@ function AuntificateModal ({onCloseModal}) {
         return (
             <div className="modal-wrapper">
                 <div className="overlay" onClick={() => {if (onCloseModal) onCloseModal(false)}}></div>
-                <div className="modal">
+                <div className="modal fadeInDownBig">
                     <div className="modal__container">
                         <p className="modal__title">Вход</p>
                         <ul className="modal__social-list">

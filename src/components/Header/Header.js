@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 import AuntificateModal from "../Modals/AuntificateModal";
 import './header.scss';
 
-function Header () {
+function Header ({isAuthShow}) {
     const isUserAuth = useSelector((store) => store.user.isAuth);
     const [isAuntificateModalShow, setAuntificateModalShow] = useState(false);
 
@@ -13,10 +13,15 @@ function Header () {
 
     useEffect(() => {
         window.addEventListener('scroll', checkHeaderSticky);
+
         return () => {
             window.removeEventListener('scroll', checkHeaderSticky);
         };
     }, []);
+
+    useEffect(() => {
+        if (!isUserAuth) setAuntificateModalShow(isAuthShow);
+    }, [isAuthShow])
 
     function checkHeaderSticky () {
         const header = headerRef.current;

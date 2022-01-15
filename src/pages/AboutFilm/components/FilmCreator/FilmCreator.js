@@ -1,37 +1,68 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
+import AsideNav from "../../../../components/AsideNav/AsideNav";
 
 function FilmCreator ({film}) {
-    const [filmInfo, setFilmInfo] = useState([])
+    const [filmInfo, setFilmInfo] = useState([]);
+
+    const navItems = React.createRef();
+    const creators = useRef();
 
     useEffect(() => {
-        setFilmInfo(film.creators)
+        window.addEventListener('scroll', defineNavItem);
+
+        return () => {
+            window.removeEventListener('scroll', defineNavItem);
+        };
+    }, [navItems])
+
+    useEffect(() => {
+        if(film) {
+            setFilmInfo(film?.creators)
+        }
     }, [film])
 
-    function navigationClick (evt) {
-        const target = evt.currentTarget;
-        const navChildrens = target.parentNode.childNodes;
+    function defineNavItem () {
+        if (window.isScrolling) return;
 
-        navChildrens.forEach((navItem) => {
-            navItem.classList.remove('nav-active');
-        })
+        const HEADER_HEIGHT = 65;
+        const scrollTop = window.scrollY;
+        const creatorsWrapper = document.querySelector('.about-film__content').offsetTop;
 
-        target.classList.add('nav-active');
+        const navChildren = navItems.current?.childNodes || [];
+
+        if (creators.current && creators.current.childNodes) {
+            creators.current.childNodes.forEach((creator, id) => {
+                if (
+                    id === creators.current.childNodes.length - 1
+                    && creator.offsetTop + creatorsWrapper - (creators.current.childNodes[id-1].clientHeight - HEADER_HEIGHT) <= scrollTop
+                ) {
+                    return navChildren.forEach((child) => {
+                        child.classList.remove('nav-active');
+                        navChildren[id].classList.add('nav-active');
+                    });
+                }
+
+                if (creator.offsetTop + creatorsWrapper <= scrollTop) {
+                    navChildren.forEach((child) => {
+                        child.classList.remove('nav-active');
+                        navChildren[id].classList.add('nav-active');
+                    });
+                }
+            });
+        }
+
     }
 
     return (
         <div className="film-creator info-content">
             <div className="info-content__nav">
-                <ul className="info-content__nav__items">
-                    {filmInfo.map((navItem, id) => {
-                        return (
-                            <li key={id} className={`info-content__nav__items__item ${id === 0 ? 'nav-active' : ''}`} onClick={navigationClick}>
-                                <a href={`#${navItem.id}`}>{navItem.title}</a>
-                            </li>
-                        )
-                    })}
-                </ul>
+                <AsideNav
+                    ref={navItems}
+                    navItems={filmInfo}
+                    useRouting={false}
+                />
             </div>
-            <div className="info-content__inner">
+            <div ref={creators} className="info-content__inner">
                 {filmInfo && filmInfo.length
                     ?
                         filmInfo.map((person, id) => {
@@ -57,7 +88,7 @@ function FilmCreator ({film}) {
                                 </div>
                             )
                         })
-                    : ''
+                    : <p style={{margin: "0 auto"}}>Не удалось загрузить рецензии или они отсутсвуют</p>
                 }
             </div>
         </div>

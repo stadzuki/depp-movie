@@ -18,16 +18,18 @@ function FilmCard () {
     }
 
     function changeExpandText (evt) {
+        evt.preventDefault();
         const target = evt.currentTarget;
+        const arrowDownIcon = target.nextSibling;
 
         setTextExpand((prev) => !prev);
 
         if (!isTextExpand) {
             target.textContent = 'Далее';
-            target.classList.remove('dp-text__blue--arrow-down__reverse');
+            arrowDownIcon.style.transform = 'rotate(0deg)';
         } else {
             target.textContent = 'Скрыть';
-            target.classList.add('dp-text__blue--arrow-down__reverse');
+            arrowDownIcon.style.transform = 'rotate(180deg)';
         }
     }
 
@@ -65,22 +67,21 @@ function FilmCard () {
                     <div className={`movie-info-full-view ${filmViewState === 'single' ? 'active' : ''}`}>
                         <div className="film-card__action-buttons">
                             <NavLink className="navlink-button navlink-button--main-btn" to={`/watch_film/${currentFilm.id}`}>
-                                <div
-                                    className="film-card__action-buttons__button film-card__action-buttons__button--watch dp-button dp-button__default dp-button__color--blue">
+                                <div className="film-card__action-buttons__button film-card__action-buttons__button--watch dp-button dp-button__default dp-button__color--blue">
                                     Смотреть фильм
                                 </div>
                             </NavLink>
                             <NavLink className="navlink-button navlink-button--secondary-btn" to={`/about_film/${currentFilm.id}`}>
-                                <div
-                                    className="film-card__action-buttons__button film-card__action-buttons__button--more dp-button dp-button__default dp-button__color--gray">
+                                <div className="film-card__action-buttons__button film-card__action-buttons__button--more dp-button dp-button__default dp-button__color--gray">
                                     Подробнее
                                 </div>
                             </NavLink>
                             <NavLink className="navlink-button navlink-button--secondary-btn" to={`/extra/${currentFilm.id}`}>
-                                <div
-                                    className="film-card__action-buttons__button film-card__action-buttons__button--extra dp-button dp-button__default dp-button__color--gray">
-                                    Экстра
-                                </div>
+                                <NavLink to="/portal/1" className="navlink-button">
+                                    <div className="film-card__action-buttons__button film-card__action-buttons__button--extra dp-button dp-button__default dp-button__color--gray">
+                                        Портал
+                                    </div>
+                                </NavLink>
                             </NavLink>
                         </div>
                         <div className="underline"></div>
@@ -119,10 +120,10 @@ function FilmCard () {
                                     Подробнее
                                 </div>
                             </NavLink>
-                            <NavLink className="navlink-button" to={`/extra/${currentFilm.id}`}>
+                            <NavLink className="navlink-button" to={`/portal/${currentFilm.id}`}>
                                 <div
                                     className="film-card__action-buttons__button film-card__action-buttons__button--extra dp-button dp-button__default dp-button__color--gray">
-                                    Экстра
+                                    Портал
                                 </div>
                             </NavLink>
                         </div>
@@ -130,11 +131,13 @@ function FilmCard () {
                             <p className="film-card__description__text">
                                 {expandText() || 'Описание...'}
                                 <span
-                                    className="film-card__description__text__show-more dp-text__blue dp-text__blue--arrow-down"
+                                    data-fancybox-href="/img/arrow-down.svg"
+                                    className="film-card__description__text__show-more dp-text__blue"
                                     onClick={(evt) => changeExpandText(evt)}
                                 >
                                     Далее
                                 </span>
+                                <img className="blue-arrow-down" src="/img/arrow-down.svg" alt="|" width="12" height="12" />
                             </p>
                         </div>
                         <div

@@ -1,0 +1,33 @@
+.profile {
+  display: flex;
+  margin-top: 75px;
+  margin-bottom: 50px;
+
+  &__aside {
+    max-width: 318px;
+    width: 318px;
+
+    &__container {
+
+    }
+
+    &__inner {
+      background: #222222;
+      padding: 32px 0px 45px 32px;
+      margin-bottom: 8px;
+    }
+
+    &__button {
+      font-weight: 500;
+      line-height: 17px;
+      width: 100%;
+      text-align: center;
+      padding-top: 12px;
+      padding-bottom: 15px;
+    }
+  }
+
+  &__content {
+    margin-left: 22px;
+  }
+}

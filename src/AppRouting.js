@@ -5,6 +5,8 @@ import {useSelector} from "react-redux";
 import AuntificateModal from "./components/Modals/AuntificateModal";
 import {useEffect, useState, lazy, Suspense} from "react";
 import Loader from "./components/Loader";
+import Portal from "./pages/Portal/Portal";
+import Profile from "./pages/Profile/Profile";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 
@@ -16,15 +18,15 @@ function AppRouting () {
     }, [userAuth])
 
     function requireAuth (Component, props) {
-        // if (!isAuth && !userAuth) return <Redirect to="/account/signin"/>
+        // if (!isAuth && !userAuth) return <Redirect to="/home/auth"/>
 
-        return <Component filmId={props.match.params.id}/>
+        return <Component {...props}/>
     }
 
-    function HomeComponent() {
+    function HomeComponent(props) {
         return (
             <Suspense fallback={<Loader/>}>
-                <Home />
+                <Home {...props} />
             </Suspense>
         );
     }
@@ -33,11 +35,10 @@ function AppRouting () {
         <Router>
             <Switch>
                 <Route exact path="/" component={HomeComponent}></Route>
-                <Route exact path="/home">
-                    <Redirect to="/" />
-                </Route>
-                <Route path="/about_film/:id" render={(props) => requireAuth(AboutFilm, props)}></Route>
-                {/*<Route path="/about_film/:id" component={AboutFilm}></Route>*/}
+                <Route path="/home/:auth?" component={HomeComponent}></Route>
+                <Route path="/about_film/:id/:tab?" render={(props) => requireAuth(AboutFilm, props)}></Route>
+                <Route path="/portal/:id" component={Portal}></Route>
+                <Route path="/user/:status?" component={Profile}></Route>
                 <Route path="/account/signin" component={AuntificateModal}></Route>
                 <Route component={NotFound}></Route>
             </Switch>

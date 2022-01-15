@@ -11,16 +11,20 @@ import Footer from "../../components/Footer/Footer";
 
 import "./home.scss";
 
-function Home () {
+function Home (props) {
     const dispatch = useDispatch();
     const userInfo = useSelector((store) => store.user);
     const filmViewState = userInfo.filmView;
 
+    const [isAutificateModalShow, setAutificateModalShow] = useState(false);
     const homeEl = useRef(null);
     const filmsFullViewEl = useRef(null);
     const filmsMinViewEl = useRef(null);
 
     useEffect(function () {
+        if(props && props.match && props.match.params.auth && props.match.params.auth === 'auth')
+            setAutificateModalShow(true)
+
         loadFilmsData();
     }, [])
 
@@ -64,7 +68,7 @@ function Home () {
 
     return (
         <>
-            <Header />
+            <Header isAuthShow={isAutificateModalShow} />
             <div ref={homeEl} className="home main-container">
                 <div className="home__displaying-views home__displaying-views__wrapper">
                     <ul className="home__displaying-views__list">

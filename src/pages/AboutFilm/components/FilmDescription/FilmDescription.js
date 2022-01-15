@@ -1,31 +1,32 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./film-description.scss";
+import AsideNav from "../../../../components/AsideNav/AsideNav";
 
 function FilmDescription ({film}) {
-    const [filmInfo, setFilmInfo] = useState({})
+    const basicNavItems = [
+        {title: 'Сюжет', id: 'plot'},
+        {title: 'Детали', id: 'details'}
+    ];
+
+    const immersiveNavItem = [
+        {title: 'Иммерсивные функции', id: 'immersive_func'}
+    ];
+
+    const navItems = React.createRef();
+    const [filmInfo, setFilmInfo] = useState({});
 
     useEffect(() => {
         if (film) setFilmInfo(film)
-    }, [film])
+    }, [film]);
 
     return (
         <div className="film-description info-content">
             <div className="info-content__nav">
-                <ul className="info-content__nav__items">
-                    <li className="info-content__nav__items__item nav-active">
-                        <a href="#plot">Cюжет</a>
-                    </li>
-                    <li className="info-content__nav__items__item">
-                        <a href="#details">Детали</a>
-                    </li>
-                    {filmInfo?.isImmersive
-                        ? <li className="info-content__nav__items__item">
-                            <a href="#immersive_func">Иммерсивные функции</a>
-                        </li>
-                        : ''
-                    }
-
-                </ul>
+                <AsideNav ref={navItems} navItems={basicNavItems} useRouting={false}/>
+                {/*{filmInfo?.isImmersive*/}
+                {/*    ? <AsideNav ref={() => {}} navItems={basicNavItems.concat(immersiveNavItem)} useRouting={false}/>*/}
+                {/*    : <AsideNav ref={() => {}} navItems={basicNavItems} useRouting={false}/>*/}
+                {/*}*/}
             </div>
             <div className="info-content__inner">
                 <div className="info-content__inner__block" id="plot">

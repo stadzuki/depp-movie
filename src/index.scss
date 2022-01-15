@@ -109,7 +109,7 @@ ul {
   &__blue {
     color: #33A4FF;
     cursor: pointer;
-    padding-left: 5px;
+    user-select: none;
 
     &--arrow-down {
       background: url("/assets/img/arrow-down.svg") no-repeat right;
@@ -125,6 +125,11 @@ ul {
       padding-right: 15px;
     }
   }
+}
+
+.blue-arrow-down {
+  margin-left: 6px;
+  transition: all .6s;
 }
 
 .dp-button {
@@ -168,6 +173,7 @@ ul {
     }
 
     &--gray {
+      color: #fff;
       background-color: #171717;
     }
   }
@@ -175,6 +181,10 @@ ul {
   &:disabled {
     opacity: .7;
     cursor: not-allowed;
+  }
+
+  &:hover {
+    opacity: 0.7;
   }
 }
 
