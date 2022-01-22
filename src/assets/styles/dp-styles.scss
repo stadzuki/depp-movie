@@ -1,0 +1,77 @@
+.dp-text {
+  &__blue {
+    color: #33A4FF;
+    cursor: pointer;
+    user-select: none;
+
+    &--arrow-down {
+      background: url("../img/arrow-down.svg") no-repeat right;
+      padding-right: 15px;
+
+      &__reverse {
+        background: url("../img/arrow-up.svg") no-repeat right;
+      }
+    }
+
+    &--arrow-link {
+      background: url("../img/arrow-link.svg") no-repeat right;
+      padding-right: 15px;
+    }
+  }
+}
+
+.dp-button {
+  &__default {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+  }
+
+  &__action {
+    margin-top: 4px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #3399FF;
+  }
+
+  &__share {
+    background: url("../img/share.svg") no-repeat left;
+    background-position-x: 16px;
+    padding: 12px 16px 12px 48px;
+  }
+
+  &__investor {
+    background: url("../img/investor.svg") no-repeat left;
+    background-position-x: 16px;
+    padding: 12px 16px 12px 48px;
+  }
+
+  &__color {
+    &--orange {
+      background: linear-gradient(91.78deg, #F38713 0%, #DE5C09 100%);
+    }
+
+    &--blue {
+      background: linear-gradient(91.78deg, #92C4FA 0%, #6B83D8 100%);
+    }
+
+    &--light-blue {
+      background-color: #5882CF;
+    }
+
+    &--gray {
+      color: #fff;
+      background-color: #171717;
+    }
+  }
+
+  &:disabled {
+    opacity: .7;
+    cursor: not-allowed;
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+}

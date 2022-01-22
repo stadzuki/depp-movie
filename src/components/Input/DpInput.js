@@ -5,10 +5,6 @@ function DpInput ({inputId, getter, setter, placeholder, type, regex, isRequired
 
     const [currentValue, setCurrentValue] = useState(inputValue);
 
-    // useEffect(() => {
-    //     setter(inputValue);
-    // }, [])
-
     function onInputChange (evt) {
         const target = evt.target;
 
@@ -18,8 +14,8 @@ function DpInput ({inputId, getter, setter, placeholder, type, regex, isRequired
             }
         }
 
-        setCurrentValue(target.value);
         setter(target.value);
+        setCurrentValue(target.value);
     }
 
     return (

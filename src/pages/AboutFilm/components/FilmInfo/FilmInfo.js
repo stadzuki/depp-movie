@@ -62,7 +62,7 @@ function FilmInfo ({film}) {
             </div>
             <div className="film-info__description">
                 <div className="film-info__description__title">
-                    <p className="film-info__description__title__text">Интерстеллар</p>
+                    <p className="film-info__description__title__text">{filmInfo?.title || '-'}</p>
                     <div className="film-info__description__title__buttons">
                         <NavLink to={'/'} className="navlink-button">
                             <div className="film-info__description__tile__buttons__button dp-button__share dp-button__default dp-button__color--gray">Поделиться</div>
@@ -114,8 +114,8 @@ function FilmInfo ({film}) {
                     <Link to={'/'} className="navlink-button">
                         <div className="film-info__description__bottom-buttons__button dp-button__default dp-button__color--blue">Смотреть фильм</div>
                     </Link>
-                    <Link  to={'/'} className="navlink-button">
-                        <div className="film-info__description__bottom-buttons__button dp-button__default dp-button__color--gray">Экстра материалы</div>
+                    <Link  to={`/film/${filmInfo.id}/portal/`} className="navlink-button">
+                        <div className="film-info__description__bottom-buttons__button dp-button__default dp-button__color--gray">Портал</div>
                     </Link>
                 </div>
             </div>

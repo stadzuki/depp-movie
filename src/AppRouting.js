@@ -1,14 +1,14 @@
 import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
-import NotFound from "./pages/NotFound";
-import AboutFilm from "./pages/AboutFilm/AboutFilm";
 import {useSelector} from "react-redux";
-import AuntificateModal from "./components/Modals/AuntificateModal";
 import {useEffect, useState, lazy, Suspense} from "react";
 import Loader from "./components/Loader";
-import Portal from "./pages/Portal/Portal";
-import Profile from "./pages/Profile/Profile";
+import NotFound from "./pages/NotFound";
 
 const Home = lazy(() => import("./pages/Home/Home"));
+const AboutFilm = lazy(() => import("./pages/AboutFilm/AboutFilm"));
+const Portal = lazy(() => import("./pages/Portal/Portal"));
+const PortalPost = lazy(() => import("./pages/PortalPost/PortalPost"));
+const Profile = lazy(() => import("./pages/Profile/Profile"));
 
 function AppRouting () {
     const userAuth = useSelector((store) => store.user.isAuth);
@@ -18,12 +18,12 @@ function AppRouting () {
     }, [userAuth])
 
     function requireAuth (Component, props) {
-        // if (!isAuth && !userAuth) return <Redirect to="/home/auth"/>
+        if (!isAuth && !userAuth) return <Redirect to="/auth"/>
 
         return <Component {...props}/>
     }
 
-    function HomeComponent(props) {
+    function HomeWrapper (props) {
         return (
             <Suspense fallback={<Loader/>}>
                 <Home {...props} />
@@ -31,18 +31,71 @@ function AppRouting () {
         );
     }
 
+    function AboutFilmWrapper (props) {
+        return (
+            <Suspense fallback={<Loader/>}>
+                <AboutFilm {...props} />
+            </Suspense>
+        )
+    }
+
+    function PortalWrapper (props) {
+        return (
+            <Suspense fallback={<Loader/>}>
+                <Portal {...props} />
+            </Suspense>
+        )
+    }
+
+    function PortalPostWrapper (props) {
+        return (
+            <Suspense fallback={<Loader/>}>
+                <PortalPost {...props} />
+            </Suspense>
+        )
+    }
+
+    function ProfileWrapper (props) {
+        return (
+            <Suspense fallback={<Loader/>}>
+                <Profile {...props} />
+            </Suspense>
+        )
+    }
+
+
     return (
         <Router>
             <Switch>
-                <Route exact path="/" component={HomeComponent}></Route>
-                <Route path="/home/:auth?" component={HomeComponent}></Route>
-                <Route path="/about_film/:id/:tab?" render={(props) => requireAuth(AboutFilm, props)}></Route>
-                <Route path="/portal/:id" component={Portal}></Route>
-                <Route path="/user/:status?" component={Profile}></Route>
-                <Route path="/account/signin" component={AuntificateModal}></Route>
-                <Route component={NotFound}></Route>
+                <Route
+                    exact
+                    path="/:auth?" component={HomeWrapper}
+                />
+                <Route
+                    path="/about_film/:id/:tab?"
+                    render={(props) => requireAuth(AboutFilmWrapper, props)}
+                />
+                <Route
+                    exact
+                    path="/film/:filmId/portal/"
+                    render={(props) => requireAuth(PortalWrapper, props)}
+                />
+                <Route
+                    exact
+                    path="/film/:filmId/portal/post/:postId/:tab?"
+                    render={(props) => requireAuth(PortalPostWrapper, props)}
+                />
+                <Route
+                    path="/user/:status?"
+                    render={(props) => requireAuth(ProfileWrapper, props)}
+                />
+                <Route component={NotFound} />
             </Switch>
             {/*<Route path="/:lang" component={SwitchLang}/>*/}
+            {/*<Route */}
+            {/*    path="/account/signin" */}
+            {/*    component={AuntificateModal}*/}
+            {/*/>*/}
         </Router>
     );
 }

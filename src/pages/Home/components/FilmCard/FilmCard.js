@@ -58,9 +58,7 @@ function FilmCard () {
                     }
                     {currentFilm.posterURL
                         ? <img className="film-card__movie__img" src={currentFilm.posterURL}/>
-                        : <div className="img__pulg">
-                            <img src="/img/broken-file.svg" alt="broken" width="75"/>
-                        </div>
+                        : <div className="img__pulg"></div>
                     }
                 </div>
                 <div className="movie-info">
@@ -76,12 +74,10 @@ function FilmCard () {
                                     Подробнее
                                 </div>
                             </NavLink>
-                            <NavLink className="navlink-button navlink-button--secondary-btn" to={`/extra/${currentFilm.id}`}>
-                                <NavLink to="/portal/1" className="navlink-button">
-                                    <div className="film-card__action-buttons__button film-card__action-buttons__button--extra dp-button dp-button__default dp-button__color--gray">
-                                        Портал
-                                    </div>
-                                </NavLink>
+                            <NavLink to={`film/${currentFilm.id}/portal`} className="navlink-button navlink-button--secondary-btn">
+                                <div className="film-card__action-buttons__button film-card__action-buttons__button--extra dp-button dp-button__default dp-button__color--gray">
+                                    Портал
+                                </div>
                             </NavLink>
                         </div>
                         <div className="underline"></div>
@@ -120,7 +116,7 @@ function FilmCard () {
                                     Подробнее
                                 </div>
                             </NavLink>
-                            <NavLink className="navlink-button" to={`/portal/${currentFilm.id}`}>
+                            <NavLink className="navlink-button" to={`film/${currentFilm.id}/portal/`}>
                                 <div
                                     className="film-card__action-buttons__button film-card__action-buttons__button--extra dp-button dp-button__default dp-button__color--gray">
                                     Портал

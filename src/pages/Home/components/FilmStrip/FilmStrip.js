@@ -51,9 +51,7 @@ function FilmStrip () {
                                     }
                                     {film.posterURL
                                         ? <img className="card__img-container__img" src={film.posterURL}/>
-                                        : <div className="img__pulg">
-                                            <img src="/img/broken-file.svg" alt="broken" width="75"/>
-                                        </div>
+                                        : <div className="img__pulg"></div>
                                     }
                                 </div>
                                 <div className="card__text">

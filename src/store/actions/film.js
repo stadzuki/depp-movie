@@ -14,3 +14,8 @@ export const addFIlmInfo = (payload) => ({
     type: constants.ADD_FILMS_INFO,
     payload
 });
+
+export const addFilmPortal = (payload) => ({
+    type: constants.ADD_FILM_PORTAL,
+    payload
+});

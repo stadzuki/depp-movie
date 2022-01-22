@@ -1,14 +1,10 @@
 import * as constants from "../constants/film";
 
 const initialState = {
-    films: [
-        // {id: 1, title: 'name', year: '2222', categories: 'some'},
-        // {id: 2, title: 'name123', year: '222223', categories: 'some2'},
-        // {id: 3, title: 'n5ame123', year: '222223', categories: 'some2'},
-    ],
-    // mainFilm: this.films[0],
+    films: [],
     mainFilm: {},
-    filmsInfo: {}
+    filmsInfo: {},
+    filmPortal: {}
 };
 
 export function film(state = initialState, action) {
@@ -30,7 +26,13 @@ export function film(state = initialState, action) {
         case constants.ADD_FILMS_INFO:
             return {
                 ...state,
-                filmsInfo: {[payload.id]: payload.data}
+                filmsInfo: {...state.filmsInfo, [payload.id]: payload.data}
+            };
+
+        case constants.ADD_FILM_PORTAL:
+            return {
+                ...state,
+                filmPortal: payload
             };
 
         default:

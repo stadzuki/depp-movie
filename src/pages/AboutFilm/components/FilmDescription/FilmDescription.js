@@ -22,11 +22,11 @@ function FilmDescription ({film}) {
     return (
         <div className="film-description info-content">
             <div className="info-content__nav">
-                <AsideNav ref={navItems} navItems={basicNavItems} useRouting={false}/>
-                {/*{filmInfo?.isImmersive*/}
-                {/*    ? <AsideNav ref={() => {}} navItems={basicNavItems.concat(immersiveNavItem)} useRouting={false}/>*/}
-                {/*    : <AsideNav ref={() => {}} navItems={basicNavItems} useRouting={false}/>*/}
-                {/*}*/}
+                {/*<AsideNav ref={navItems} navItems={basicNavItems} useRouting={false}/>*/}
+                {filmInfo?.isImmersive
+                    ? <AsideNav ref={navItems} navItems={basicNavItems.concat(immersiveNavItem)} useRouting={false}/>
+                    : <AsideNav ref={navItems} navItems={basicNavItems} useRouting={false}/>
+                }
             </div>
             <div className="info-content__inner">
                 <div className="info-content__inner__block" id="plot">

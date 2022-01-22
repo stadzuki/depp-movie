@@ -1,37 +1,9 @@
 @import "./assets/styles/main.scss";
 
-//scroll
-.ps__rail-x{
-  background: transparent !important;
-}
-
-.ps__rail-y{
-  background: transparent !important;
-}
-
-.ps__thumb-y {
-  transition: all .3s;
-  width: 6px !important;
-  //background-color: #262626 !important;
-  //opacity: 1 !important;
-}
-
-.ps__thumb-x {
-  transition: all .3s;
-  height: 7px !important;
-  //background-color: #262626 !important;
-  //opacity: 1 !important;
-}
-
-.loader {
-  position: absolute;
-  z-index: 1004;
-  left: 0;
-  right: 0;
-  top: 40%;
-  margin: 0 auto;
-  width: 200px;
-  height: 200px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -45,45 +17,9 @@ body {
   margin: 0;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-button {
-  border: none;
-  cursor: pointer;
-  font-family: 'Montserrat', Arial, Calibri sans-serif;
-  font-style: normal;
-}
-
-.navlink-button {
-  text-align: center;
-
-  &:hover {
-    opacity: .7;
-  }
-}
-
-a {
-  text-decoration: none;
-  color: #FFFFFF;
-  cursor: pointer;
-}
-
-li {
-  list-style: none;
-}
-
-p {
-  margin: 0;
-  padding: 0;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
+.main-container {
+  max-width: 1344px;
+  margin: 0 auto;
 }
 
 .active {
@@ -94,9 +30,23 @@ ul {
   display: none !important;
 }
 
-.main-container {
-  max-width: 1344px;
+.loader {
+  position: absolute;
+  z-index: 1004;
+  left: 0;
+  right: 0;
+  top: 40%;
   margin: 0 auto;
+  width: 200px;
+  height: 200px;
+}
+
+.navlink-button {
+  text-align: center;
+
+  &:hover {
+    opacity: .7;
+  }
 }
 
 .link {
@@ -105,171 +55,20 @@ ul {
   }
 }
 
-.dp-text {
-  &__blue {
-    color: #33A4FF;
-    cursor: pointer;
-    user-select: none;
-
-    &--arrow-down {
-      background: url("/assets/img/arrow-down.svg") no-repeat right;
-      padding-right: 15px;
-
-      &__reverse {
-        background: url("/assets/img/arrow-up.svg") no-repeat right;
-      }
-    }
-
-    &--arrow-link {
-      background: url("/assets/img/arrow-link.svg") no-repeat right;
-      padding-right: 15px;
-    }
-  }
-}
-
 .blue-arrow-down {
   margin-left: 6px;
   transition: all .6s;
 }
 
-.dp-button {
-  &__default {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 20px;
-    color: #FFFFFF;
-  }
-
-  &__action {
-    margin-top: 4px;
-    font-weight: 500;
-    font-size: 16px;
-    color: #3399FF;
-  }
-
-  &__share {
-    background: url("/assets/img/share.svg") no-repeat left;
-    background-position-x: 16px;
-    padding: 12px 16px 12px 48px;
-  }
-
-  &__investor {
-    background: url("/assets/img/investor.svg") no-repeat left;
-    background-position-x: 16px;
-    padding: 12px 16px 12px 48px;
-  }
-
-  &__color {
-    &--orange {
-      background: linear-gradient(91.78deg, #F38713 0%, #DE5C09 100%);
-    }
-
-    &--blue {
-      background: linear-gradient(91.78deg, #92C4FA 0%, #6B83D8 100%);
-    }
-
-    &--light-blue {
-      background-color: #5882CF;
-    }
-
-    &--gray {
-      color: #fff;
-      background-color: #171717;
-    }
-  }
-
-  &:disabled {
-    opacity: .7;
-    cursor: not-allowed;
-  }
-
-  &:hover {
-    opacity: 0.7;
-  }
-}
-
-.overlay {
-  left: 0;
-  top: 0;
-  z-index: 1000;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, .6);
-}
-
-.form {
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-
-  &__input {
-    background: none;
-    padding: 20px 0px 20px 20px;
-    border: 1px solid #333333;
-    margin-bottom: 16px;
-    color: #FFFFFF;
-    font-size: 16px;
-    line-height: 20px;
-
-    &:last-child {
-      margin-bottom: 0px;
-    }
-
-    &::placeholder {
-      color: #FFFFFF;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 16px;
-      line-height: 20px;
-    }
-
-    &__error {
-      border: 1px solid rgba(191, 52, 52, 0.3);
-    }
-  }
-
-  &__input-wrapper {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px;
-
-    .form__input {
-      margin-bottom: 0px;
-
-      &__error-message {
-        display: none;
-        margin-top: 2px;
-        line-height: 19px;
-        font-weight: 500;
-        font-size: 12px;
-        color: #BF3434;
-      }
-    }
-  }
-
-  &__error-message {
-    display: none;
-    text-align: center;
-    color: #BF3434;
-    margin-bottom: 15px;
-  }
+.error-massage {
+  color: red;
 }
 
 .img__pulg {
-  position: relative;
   width: 100%;
   height: 100%;
-  background: #171717;
-
-  & > img {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
+  background: #171717 url("/assets/img/broken-file.svg") no-repeat center center;
+  background-size: 10%;
 }
 
 .img-in-block {

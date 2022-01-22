@@ -5,14 +5,13 @@ import FilmService from "../../services/film";
 
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-
 import FilmInfo from "./components/FilmInfo/FilmInfo";
 import FilmDescription from "./components/FilmDescription/FilmDescription";
 import FilmCreator from "./components/FilmCreator/FilmCreator";
 import FilmReviews from "./components/FilmReviews/FilmReviews";
+import DescriptionTabCtrl from "../../components/DescriptionTabCtrl/DescriptionTabCtrl";
 
 import "./about-film.scss";
-import {NavLink} from "react-router-dom";
 
 function AboutFilm (props) {
     const filmId = props.match.params.id || -1;
@@ -175,6 +174,8 @@ function AboutFilm (props) {
     }
 
     useEffect(() => {
+        if (filmInfo[filmId]) return;
+
         FilmService.getFilm(filmId)
             .then((response) => {
                 dispatch(filmActions.addFIlmInfo({id: response.data.id, data: response.data}))
@@ -185,65 +186,18 @@ function AboutFilm (props) {
             });
     }, [])
 
-    function getBottomContent () {
-        switch (bottomContent) {
-            case 'description':
-                return <FilmDescription film={test}/>//filmInfo[filmId]
-                break;
-            case 'creators':
-                return <FilmCreator film={test}/>
-                break;
-            case 'reviews':
-                return <FilmReviews film={test}/>
-                break;
-        }
-    }
-
-    function loadBottomContent (evt, component) {
-        if (component === bottomContent) return 1;
-
-        if (props && props.history) {
-            props.history.push(`/about_film/${filmId}/${component}`);
-        }
-
-
-        const target = evt.currentTarget;
-        const navItems = target.parentNode.childNodes;
-
-        navItems.forEach(item => item.classList.remove('tab-active'));
-        target.classList.add('tab-active');
-
-        setBottomContent(component);
-    }
-
     return (
         <>
             <Header/>
             <div className="about-film about-film__wrapper main-container">
                 <FilmInfo film={filmInfo[filmId]}/>
-                <div className="about-film__content">
-                    <div className="about-film__content__tabs">
-                        <p
-                            ref={navFilmDescRef}
-                            className={`about-film__content__tabs__tab ${bottomContent === 'description' ? 'tab-active' : ''}`}
-                            onClick={(evt) => loadBottomContent(evt, 'description')}
-                        >Описание фильма</p>
-                        <p
-                            className={`about-film__content__tabs__tab ${bottomContent === 'creators' ? 'tab-active' : ''}`}
-                            onClick={(evt) => loadBottomContent(evt, 'creators')}
-                        >Создатели</p>
-                        <p
-                            className={`about-film__content__tabs__tab ${bottomContent === 'reviews' ? 'tab-active' : ''}`}
-                            onClick={(evt) => loadBottomContent(evt, 'reviews')}
-                        >Рецензии</p>
-                    </div>
-                    <div className="about-film__content__inner">
-                        {getBottomContent()}
-                        {/*{!filmInfo*/}
-                        {/*    ? <div className="about-film__content__inner--no-content">Не удалось загрузить информациб о фильме</div>*/}
-                        {/*    : getBottomContent()}*/}
-                    </div>
-                </div>
+                <DescriptionTabCtrl
+                    history={props.history}
+                    activeTab={props.match.params.tab}
+                    filmId={filmId}
+                    tabData={filmInfo[filmId]}
+                    tabTitle={{firstTab: 'Описание фильма', secondTab: 'Создатели', thirdTab: 'Рецензии'}}
+                />
             </div>
             <Footer/>
         </>

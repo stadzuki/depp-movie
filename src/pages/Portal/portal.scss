@@ -12,6 +12,7 @@
       display: flex;
 
       &__element {
+        cursor: pointer;
         display: flex;
         align-items: center;
         font-size: 12px;
@@ -61,6 +62,98 @@
 
   &__content {
     margin-top: 40px;
+
+    &__boxes {
+      max-width: 100%;
+      justify-content: space-between;
+      display: flex;
+      flex-wrap: wrap;
+
+      &__include-children {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        &__box-children {
+          display: flex;
+          width: calc(100% - 32% - 2%);
+          flex-wrap: wrap;
+          justify-content: space-between;
+          margin-top: auto;
+
+          &--8-3 {
+            width: 100%;
+            height: 333px;
+            background-color: #33A4FF;
+          }
+
+          &--4-3 {
+            margin-top: 24px;
+            width: 48.65%;
+            height: 290px;
+            background-color: #BE58CF;
+          }
+        }
+      }
+
+      &__box {
+        margin-top: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 64px;
+        font-weight: 600;
+
+        &--3-2 {
+          width: 49%;
+          height: 400px;
+          background-color: red;
+        }
+
+        &--1-1 {
+          width: 32%;
+          height: 432px;
+          background-color: yellow;
+        }
+
+        &--8-1 {
+          width: 66%;
+          height: 432px;
+          background-color: #333333;
+        }
+
+        &--2-3 {
+          width: 32%;
+          height: 647px;
+          background-color: #6B83D8;
+        }
+
+        &--7-5 {
+          width: 57.5%;
+          height: 546px;
+          background-color: royalblue;
+        }
+
+        &--1-2 {
+          width: 40.6%;
+          height: 546px;
+          background-color: #CF6D58;
+        }
+
+        &--9-16 {
+          width: 23.58%;
+          height: 507px;
+          background-color: #58CFBA;
+        }
+
+        &--10-13 {
+          width: 49.18%;
+          height: 507px;
+          background-color: burlywood;
+        }
+      }
+    }
 
     &__line-inner {
       margin-top: 25px;
@@ -117,105 +210,6 @@
 
       &:last-child {
         margin-bottom: 0;
-      }
-
-      &.first-line {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 400px;
-        grid-template-areas:
-            "ab ba";
-
-        .ab {
-          grid-area: ab;
-          background: #5882CF;
-        }
-
-        .ba {
-          grid-area: ba;
-          background: #F7C054;
-        }
-      }
-
-      &.second-line {
-        grid-template-columns: 32% auto;
-        grid-template-rows: 432px;
-        grid-template-areas:
-            "ab ba";
-
-        .ab {
-          grid-area: ab;
-          background: #58CFBA;
-        }
-
-        .ba {
-          grid-area: ba;
-          background: #333;
-        }
-      }
-
-      &.third-line {
-        grid-template-columns: 32% auto auto;
-        grid-template-rows: 333px 290px;
-        grid-template-areas:
-          "aa ca ca"
-          "aa bb bc";
-
-        .aa {
-          grid-area: aa;
-          background: #CF586D;
-        }
-
-        .bb {
-          grid-area: bb;
-          background: #CF6D58;
-        }
-
-        .ca {
-          grid-area: ca;
-          background: #7E58CF;
-        }
-
-        .bc {
-          grid-area: bc;
-          background: #58CF88;
-        }
-      }
-
-      &.fourth-line {
-        grid-template-columns: 58% auto;
-        grid-template-rows: 546px;
-        grid-template-areas:
-            "ab ba";
-
-        .ab {
-          grid-area: ab;
-          background: #58CF88;
-        }
-        .ba {
-          grid-area: ba;
-          background: #BE58CF;
-        }
-      }
-
-      &.fifth-line {
-        grid-template-columns: 24% 24% auto;
-        grid-template-rows: 507px;
-        grid-template-areas:
-            "aa ab ac";
-
-        .aa {
-          grid-area: aa;
-          background: #5882CF;
-        }
-        .ab {
-          grid-area: ab;
-          background: #CF586D;
-        }
-
-        .ac {
-          grid-area: ac;
-          background: #58CFBA;
-        }
       }
     }
   }

@@ -10,6 +10,8 @@ function ProfileData () {
     const dispatch = useDispatch();
     const userProfileData = useSelector((store) => store.user.profileData);
 
+    const [errorMessage, setErrorMessage] = useState('');
+
     // Response for displaying editor mode
     const [isUserDataEdit, setUserDataEdit] = useState(false);
     const [isUserPasswordEdit, setUserPasswordEdit] = useState(false);
@@ -31,7 +33,7 @@ function ProfileData () {
 
     // Addresses items
     const currentAddress = useRef(null);
-    const [userAddresses, setUserAddresses] = useState(userProfileData.userDelivery);
+    const [userAddresses, setUserAddresses] = useState(userProfileData.userDelivery || []);
 
     // Response for user password data
     const [userOldPassword, setUserOldPassword] = useState('');
@@ -59,12 +61,11 @@ function ProfileData () {
     });
 
     useEffect(() => {
-        if (userProfileData.userData
-            && Object.keys(userProfileData.userData).length > 0
-            && userProfileData.userDelivery
-            && userProfileData.userDelivery.length > 0) {
+        if ((userProfileData.userData && Object.keys(userProfileData.userData).length > 0)
+            || (userProfileData.userDelivery && userProfileData.userDelivery.length > 0)) {
             loadProfileInputsData();
             loadProfileAddresses();
+            return;
         }
 
         UserService.getUserProfileData()
@@ -88,14 +89,14 @@ function ProfileData () {
         const userPassword = profileInputs.userPassword;
         const userDeliveryFields = profileInputs.userDelivery;
         const userDelivery = userProfileData.userDelivery;
-        const userData = profileInputs.userData
+        const userData = profileInputs.userData;
 
         userData.map((data) => {
            if (data.id === 'user-name') {
-               data.value = userProfileData.userData.name;
+               data.value = userProfileData.userData?.fio || '';
            }
             if (data.id === 'user-phone') {
-                data.value = userProfileData.userData.phone;
+                data.value = userProfileData.userData?.phone || '';
             }
         });
 
@@ -129,22 +130,44 @@ function ProfileData () {
     }
 
     function saveData () {
-
+        UserService.saveUserProfileData(userProfileData)
+            .then((resp) => {
+                console.log(resp)
+            })
+            .catch((error) => {
+                console.error('cannot save user profile data', error)
+            })
     }
 
     function saveProfileData () {
         const userData = {
-            name: userName,
+            fio: userName,
             phone: userPhone,
-            email: userProfileData.userData.email
+            login: userProfileData?.userData.login,
+            email: userProfileData?.userData.email
         }
 
-        // dispatch(userActions.changeUserProfilePersonalData({userData: userData}))
-        dispatch(userActions.updateUserProfileData({userData, userDelivery: userProfileData.userDelivery}))
+        dispatch(userActions.updateUserProfileData({id: userProfileData.id, userData, userDelivery: userProfileData.userDelivery}));
     }
 
     function loadProfileAddresses () {
         setUserAddresses(userProfileData.userDelivery);
+    }
+
+    function changeUserProfile () {
+        setErrorMessage('');
+
+        UserService.changeUserPassword({oldPassword: userOldPassword, newPassword: userNewPassword})
+            .then((response) => {
+                if (!response.data?.isSuccessful) {
+                    return setErrorMessage('Пароли не совпадают или текущий пароль указан неверно!');
+                }
+
+                onEditDataClick('', setUserPasswordEdit);
+            })
+            .catch((error) => {
+                console.log('cannot set user password', error)
+            })
     }
 
     function saveProfileAddresses () {
@@ -152,10 +175,10 @@ function ProfileData () {
             title: newAddressTitle,
             country: userCountry,
             street: userStreet,
-            home: userHome,
-            homeNumber: userHomeNumber,
+            house: userHome,
+            apartment: userHomeNumber,
             city: userCity,
-            zipcode: userZipcode,
+            zipCode: userZipcode,
             phone: userPhone,
         }
 
@@ -180,13 +203,9 @@ function ProfileData () {
         }
 
         dispatch(userActions.updateUserProfileData({userDelivery: userAddresses, userData: userProfileData.userData}))
-
-        console.log(userProfileData)
     }
 
     function onEditSaveClick (editorData, editorSetter) {
-        onEditDataClick('', editorSetter)
-
         if (editorData === 'userData') {
             saveProfileData();
         }
@@ -196,10 +215,12 @@ function ProfileData () {
         }
 
         if (editorData === 'userPassword') {
-
+            changeUserProfile();
+            return;
         }
 
         saveData();
+        onEditDataClick('', editorSetter);
     }
 
     function onEditDataClick (editorData, editorSetter) {
@@ -233,10 +254,10 @@ function ProfileData () {
             setNewAddressTitle(targetAddress.title);
             setUserCountry(targetAddress.country);
             setUserStreet(targetAddress.street);
-            setUserZipcode(targetAddress.zipcode);
+            setUserZipcode(targetAddress.zipCode);
             setUserCity(targetAddress.city);
-            setUserHome(targetAddress.home);
-            setUserHomeNumber(targetAddress.homeNumber);
+            setUserHome(targetAddress.house);
+            setUserHomeNumber(targetAddress.apartment);
         } else {
             currentAddress.current = null;
             setUserDeliveryAdding(true);
@@ -256,14 +277,14 @@ function ProfileData () {
         <div className="profile-data">
             <div className="profile-data__title">
                 Профиль
-                <span className="profile-data__title__user-name"> {userName}</span>
+                <span className="profile-data__title__user-name"> {userProfileData?.userData?.login}</span>
             </div>
             <div className="profile-data__block block">
                 <p className="block__title">Личный данные</p>
                 {isUserDataEdit
                     ? <>
                         <div className="block__input__wrapper">
-                            {profileInputs.userData.map((input, id) => (
+                            {profileInputs?.userData.map((input, id) => (
                                 <div className="block__input" key={id}>
                                     <DpInput
                                         inputWidth={input.width}
@@ -295,9 +316,9 @@ function ProfileData () {
                             <div className="block__description">
                                 <span className="block__description--strong">Контактная информация</span>
                                 <div>
-                                    <p>{userProfileData.userData.name}</p>
-                                    <p>{userProfileData.userData.phone}</p>
-                                    <p>{userProfileData.userData.email}</p>
+                                    <p>{userProfileData?.userData?.fio || '-'}</p>
+                                    <p>{userProfileData?.userData?.phone || '-'}</p>
+                                    <p>{userProfileData?.userData?.email || '-'}</p>
                                 </div>
 
                             </div>
@@ -359,15 +380,15 @@ function ProfileData () {
                                         <span className="block__description--strong">{address.title}</span>
                                         <div>
                                             <p>{address.country}</p>
-                                            <p>{address.street}, {address.home} {address.homeNumber ? `, ${address.homeNumber}` : ''}</p>
-                                            <p>{address.city}, {address.zipcode}</p>
+                                            <p>{address.street}, {address.house} {address.apartment ? `, ${address.apartment}` : ''}</p>
+                                            <p>{address.city}, {address.zipCode}</p>
                                             <p>{userPhone}</p>
                                         </div>
                                     </div>
                                     <div className="block__change-info dp-text__blue" onClick={() => onEditAddressClick(address)}>Изменить</div>
                                 </div>
                             ))
-                            : ''
+                            : <p style={{marginTop: 15, opacity: 0.5}}>Адреса отсутствуют</p>
                         }
                     </div>
                 }
@@ -381,6 +402,7 @@ function ProfileData () {
                                 <DpInput
                                     inputWidth={input.width}
                                     inputId={input.id}
+                                    inputValue={input.value}
                                     regex={input.regex}
                                     type={input.type}
                                     getter={input.getter}
@@ -399,7 +421,11 @@ function ProfileData () {
             </div>
             {(isUserDataEdit && isUserDeliveryEdit) || isUserPasswordEdit
                 ? <>
-                    <button className="profile-data__save-btn profile-data__save-btn--mt-20 dp-button dp-button__default dp-button__color--blue">Сохранить изменения</button>
+                    {errorMessage ? <p className="error-massage">{errorMessage}</p> : ''}
+                    <button
+                        className="profile-data__save-btn profile-data__save-btn--mt-20 dp-button dp-button__default dp-button__color--blue"
+                        onClick={() => onEditSaveClick('userPassword', setUserPasswordEdit)}
+                    >Сохранить изменения</button>
                     <button
                         className="profile-data__cancel-btn profile-data__save-btn--mt-20 dp-button dp-button__default dp-button__color--gray"
                         onClick={() => onEditDataClick('', setUserPasswordEdit)}

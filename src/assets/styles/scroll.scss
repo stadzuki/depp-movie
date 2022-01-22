@@ -1,0 +1,22 @@
+//scroll
+.ps__rail-x{
+  background: transparent !important;
+}
+
+.ps__rail-y{
+  background: transparent !important;
+}
+
+.ps__thumb-y {
+  transition: all .3s;
+  width: 6px !important;
+  //background-color: #262626 !important;
+  //opacity: 1 !important;
+}
+
+.ps__thumb-x {
+  transition: all .3s;
+  height: 7px !important;
+  //background-color: #262626 !important;
+  //opacity: 1 !important;
+}

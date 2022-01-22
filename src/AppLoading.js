@@ -5,17 +5,15 @@ import AuthService from "./services/auth";
 import AppRouting from "./AppRouting";
 import Loader from "./components/Loader";
 
-function AppLoading (props) {
+function AppLoading () {
     const dispatch = useDispatch();
-    const [isAppReady, setAppReady] = useState(true);
-    const isAuth = useSelector((store) => store.user.isAuth);
+    const [isAppReady, setAppReady] = useState(false);
 
     useEffect(function () {
         const token = localStorage.getItem('token');
         if (token) {
             AuthService.checkIfTokenAvaliable()
                 .then((response) => {
-                    console.log('credo auth', response)
                     dispatch(action.changeUserAuntification(true));
                 })
                 .catch((error) => {
@@ -24,6 +22,9 @@ function AppLoading (props) {
                 .finally(() => {
                     setAppReady(true);
                 })
+        } else {
+            dispatch(action.changeUserAuntification(false));
+            setAppReady(true);
         }
     }, [])
 
