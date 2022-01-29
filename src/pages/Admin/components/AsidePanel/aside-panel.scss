@@ -1,0 +1,14 @@
+.aside-panel {
+  background: #222222;
+  padding: 32px 0px 45px 32px;
+  margin-bottom: 8px;
+
+  &__button {
+    font-weight: 500;
+    line-height: 17px;
+    width: 100%;
+    text-align: center;
+    padding-top: 12px;
+    padding-bottom: 15px;
+  }
+}

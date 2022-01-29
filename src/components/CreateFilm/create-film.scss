@@ -1,0 +1,153 @@
+.create-film {
+  width: 100%;
+  height: 100%;
+
+  &-container {
+    max-width: 888px;
+    margin: 30px auto;
+  }
+}
+
+.offer-content {
+  margin-top: 10px;
+
+  &__separator {
+    width: 100%;
+    border: 1px solid #222222;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 38px;
+    line-height: 46px;
+    margin-bottom: 40px;
+  }
+
+  &__country-tab-wrapper {
+    margin-bottom: 24px;
+  }
+
+  &__block {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    max-width: 660px;
+
+    &__title {
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 28px;
+    }
+
+    &__subtitle {
+      margin-top: 12px;
+      font-size: 14px;
+      line-height: 22px;
+    }
+
+    &__list {
+      margin-top: 24px;
+
+      &__item {
+        display: flex;
+        margin-bottom: 16px;
+        width: 410px;
+
+        &__inner {
+          margin-left: 12px;
+        }
+
+        &__title {
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+
+  &__form {
+    margin: 32px 0;
+
+    &__inner {
+      display: flex;
+      align-items: center;
+      margin-top: 16px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &__input {
+        opacity: 0;
+        position: absolute;
+
+        &:checked ~ &__radio {
+          border: 2px solid #FF4A78;
+          opacity: 1;
+
+          &:after {
+            display: block;
+          }
+        }
+
+        &:hover ~ &__radio {
+          border: 2px solid #FF4A78;
+          opacity: 0.5;
+        }
+
+        &__radio {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          width: 32px;
+          height: 32px;
+          border-radius: 100%;
+          opacity: 0.5;
+          border: 2px solid #FFFFFF;
+
+          &:after {
+            content: '';
+            display: none;
+            width: 14px;
+            height: 10px;
+            background: transparent url("../../assets/img/success.svg") no-repeat center;
+            background-size: contain;
+          }
+        }
+      }
+
+      &__block {
+        margin-left: 16px;
+
+        &__title {
+          font-weight: 600;
+          font-size: 24px;
+          line-height: 32px;
+        }
+
+        &__subtitle {
+          font-size: 16px;
+          line-height: 24px;
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  &__buttons {
+    margin-top: 25px;
+    display: flex;
+
+    &__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 32px;
+      max-height: 56px;
+      height: 56px;
+      margin-right: 8px;
+      text-align: center;
+    }
+  }
+}

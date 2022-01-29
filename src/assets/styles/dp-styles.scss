@@ -47,6 +47,11 @@
     padding: 12px 16px 12px 48px;
   }
 
+  &__outline {
+    border: 2px solid #5882CF;
+    background: transparent;
+  }
+
   &__color {
     &--orange {
       background: linear-gradient(91.78deg, #F38713 0%, #DE5C09 100%);

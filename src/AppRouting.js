@@ -9,16 +9,26 @@ const AboutFilm = lazy(() => import("./pages/AboutFilm/AboutFilm"));
 const Portal = lazy(() => import("./pages/Portal/Portal"));
 const PortalPost = lazy(() => import("./pages/PortalPost/PortalPost"));
 const Profile = lazy(() => import("./pages/Profile/Profile"));
+const Admin = lazy(() => import("./pages/Admin/Admin"));
+const OfferFilm = lazy(() => import("./pages/OfferFilm/OfferFilm"));
+
 
 function AppRouting () {
     const userAuth = useSelector((store) => store.user.isAuth);
     const [isAuth, setAuth] = useState(false);
+
     useEffect(() => {
         setAuth(userAuth);
     }, [userAuth])
 
     function requireAuth (Component, props) {
-        if (!isAuth && !userAuth) return <Redirect to="/auth"/>
+        // if (!isAuth && !userAuth) return <Redirect to="/auth"/>
+
+        return <Component {...props}/>
+    }
+
+    function requireAdminAccess (Component, props) {
+        // if (!isAuth && !userAuth && isUserAdmin) return <Redirect to="/404"/>
 
         return <Component {...props}/>
     }
@@ -63,6 +73,21 @@ function AppRouting () {
         )
     }
 
+    function OfferFilmWrapper (props) {
+        return (
+            <Suspense fallback={<Loader/>}>
+                <OfferFilm {...props} />
+            </Suspense>
+        )
+    }
+
+    function AdminWrapper (props) {
+        return (
+            <Suspense fallback={<Loader/>}>
+                <Admin {...props} />
+            </Suspense>
+        )
+    }
 
     return (
         <Router>
@@ -88,6 +113,15 @@ function AppRouting () {
                 <Route
                     path="/user/:status?"
                     render={(props) => requireAuth(ProfileWrapper, props)}
+                />
+                <Route
+                    path="/panel/offer_film"
+                    render={(props) => requireAuth(OfferFilmWrapper, props)}
+                />
+                <Route
+                    exact
+                    path="/panel/admin/:tab?"
+                    render={(props) => requireAdminAccess(AdminWrapper, props)}
                 />
                 <Route component={NotFound} />
             </Switch>

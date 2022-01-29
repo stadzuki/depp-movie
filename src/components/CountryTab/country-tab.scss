@@ -1,0 +1,39 @@
+.country-tab-list {
+  max-width: 1002px  !important;
+  padding-right: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #222222;
+  display: flex;
+
+
+  &__country {
+    cursor: pointer;
+    position: relative;
+    width: 166px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    margin-right: 24px;
+    opacity: 0.5;
+
+    &::after {
+      content: '';
+      display: none;
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 0;
+      height: 4px;
+      background: #5882CF;
+      width: 100%;
+    }
+
+    &--active {
+      opacity: 1;
+    }
+
+    &--active.country-tab-list__country::after {
+      display: block;
+    }
+  }
+}

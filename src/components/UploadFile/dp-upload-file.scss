@@ -1,0 +1,136 @@
+.upload-file {
+  margin-bottom: 16px;
+
+  &__wrapper {
+    width: 318px;
+    height: 56px;
+    background: #121212;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    
+    &__input {
+      display: none;
+
+      &:disabled + label {
+        opacity: 0.5;
+        cursor: no-drop;
+      }
+    }
+
+    &__title {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      line-height: 20px;
+
+      &__plus {
+        margin-right: 20px;
+        font-size: 32px;
+        font-weight: 400;
+      }
+    }
+  }
+  
+  &__file-list {
+    width: 318px;
+    margin-top: 1px;
+
+    &__file {
+      height: 56px;
+      display: flex;
+      align-items: center;
+      margin-top: 1px;
+      background: #222222;
+      padding: 12px 17px 12px 13px;
+
+      &__text {
+        margin-left: 13px;
+
+        &__title {
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 16px;
+        }
+
+        &__subtitle {
+          margin-top: 2px;
+          font-size: 12px;
+          line-height: 14px;
+          opacity: 0.5;
+        }
+      }
+
+      &__close-btn {
+        margin-left: auto;
+        width: 20px;
+        height: 20px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &__img {
+          width: 35px;
+          height: 35px;
+        }
+      }
+
+      &__loading-wrapper {
+        width: 80%;
+        height: 3px;
+        position: relative;
+        margin-left: auto;
+
+        .loading-line {
+          position: relative;
+          top: 0px;
+          left: 0px;
+          bottom: auto;
+          right: auto;
+          width: 100%;
+          height: 100%;
+          transform-origin: 100% 0%;
+          animation: kf_loading_line 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0s infinite;
+
+          &__inner {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            bottom: auto;
+            right: auto;
+            width: 100%;
+            height: 100%;
+            background: #5882CF;
+            border-radius: 5px;
+            transform-origin: 0% 0%;
+
+            &--1 {
+              opacity: 0;
+              animation: kf_loading_line_inner--1 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0s infinite;
+            }
+
+            &--2 {
+              opacity: 1;
+              animation: kf_loading_line_inner--2 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0s infinite;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__subtitle {
+    margin-top: 8px;
+    opacity: 0.5;
+  }
+
+  &__file-load-error {
+    margin-top: 5px;
+    color: #ce3434;
+  }
+}
+

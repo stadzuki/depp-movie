@@ -3,12 +3,21 @@
   justify-content: flex-start !important;
 }
 
+.df-jc-between {
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
 .mt-auto {
   margin-top: auto !important;
 }
 
 .mr-24 {
   margin-right: 24px;
+}
+
+.mt-40 {
+  margin-top: 40px !important;
 }
 
 .visible {

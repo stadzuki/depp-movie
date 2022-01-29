@@ -2,7 +2,6 @@ import {NavLink} from "react-router-dom";
 import {useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import AuntificateModal from "../Modals/AuntificateModal";
-import './header.scss';
 
 function Header ({isAuthShow}) {
     const isUserAuth = useSelector((store) => store.user.isAuth);
@@ -71,7 +70,7 @@ function Header ({isAuthShow}) {
                         <NavLink className="link" to="/funshop">Фаншоп</NavLink>
                     </li>
                 </ul>
-                <p className="header__propose-project">Предложить проект</p>
+                <NavLink className="header__propose-project link" to="/panel/offer_film">Предложить проект</NavLink>
                 <ul className="header__user-controls">
                     <li className="header__user-controls__item header__user-controls__item--language">
                         <img src="/img/globe.svg" alt="Select Language" width="32" height="32"/>

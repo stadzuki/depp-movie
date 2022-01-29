@@ -21,6 +21,7 @@
     "react-vk-auth": "0.0.2",
     "react-wechat-login": "^1.1.1",
     "redux": "^4.1.2",
+    "uniqid": "^5.4.0",
     "web-vitals": "^2.1.2"
   },
   "scripts": {

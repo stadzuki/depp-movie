@@ -19,3 +19,8 @@ export const addFilmPortal = (payload) => ({
     type: constants.ADD_FILM_PORTAL,
     payload
 });
+
+export const offerFilm = (payload) => ({
+   type: constants.OFFER_FILM,
+   payload
+});

@@ -1,10 +1,9 @@
-import "./profile.scss";
 import Header from "../../components/Header/Header";
 import AsideNav from "../../components/AsideNav/AsideNav";
 import Footer from "../../components/Footer/Footer";
-import DpInput from "../../components/Input/DpInput";
-import {useState} from "react";
 import ProfileData from "./components/ProfileData/ProfileData";
+
+import "./profile.scss";
 
 function Profile () {
     const userNavItems = [

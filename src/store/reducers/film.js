@@ -4,7 +4,31 @@ const initialState = {
     films: [],
     mainFilm: {},
     filmsInfo: {},
-    filmPortal: {}
+    filmPortal: {},
+    offerFilm: {
+        requestion: 'individual',
+        requiredInfo: {
+            ru: {
+                filmName: '123',
+                shortDescription: '',
+                detailedDescription: '',
+                budget: '',
+            },
+            en: {
+                filmName: '',
+                shortDescription: '',
+                detailedDescription: '',
+                budget: '',
+            },
+            cn: {
+                filmName: '',
+                shortDescription: '',
+                detailedDescription: '',
+                budget: '',
+            },
+        },
+        additionalInfo: {}
+    }
 };
 
 export function film(state = initialState, action) {
@@ -33,6 +57,13 @@ export function film(state = initialState, action) {
             return {
                 ...state,
                 filmPortal: payload
+            };
+
+        case constants.OFFER_FILM:
+            Object.assign(state.offerFilm, payload);
+            return {
+                ...state,
+                offerFilm: {...state.offerFilm, payload}
             };
 
         default:

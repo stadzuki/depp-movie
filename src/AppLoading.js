@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import * as action from "./store/actions/user";
 import AuthService from "./services/auth";
 import AppRouting from "./AppRouting";
@@ -17,11 +17,15 @@ function AppLoading () {
                     dispatch(action.changeUserAuntification(true));
                 })
                 .catch((error) => {
+                    dispatch(action.changeUserAuntification(false));
+                    setAppReady(true);
                     console.error('cannot authorize user', error);
                 })
                 .finally(() => {
+                    dispatch(action.changeUserAuntification(false));
                     setAppReady(true);
                 })
+            setAppReady(true);
         } else {
             dispatch(action.changeUserAuntification(false));
             setAppReady(true);
