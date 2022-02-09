@@ -4,7 +4,7 @@
 
   &-container {
     max-width: 888px;
-    margin: 30px auto;
+    margin: 30px auto 60px auto;
   }
 }
 
@@ -27,10 +27,31 @@
     margin-bottom: 24px;
   }
 
+  &__form-wrapper {
+    width: 1002px !important;
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__block {
     margin-top: 60px;
     margin-bottom: 60px;
     max-width: 660px;
+
+    &__team-member {
+      margin-bottom: 35px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &__upload-files-title {
+        cursor: pointer;
+        padding-left: 26px;
+        margin-bottom: 5px;
+        background: url("../../assets/img/attach-file-icon.svg") no-repeat left center;
+      }
+    }
 
     &__title {
       font-weight: 600;
@@ -63,6 +84,11 @@
         }
       }
     }
+  }
+
+  &__additional-info {
+    max-width: 432px;
+    margin-top: 12px;
   }
 
   &__form {
@@ -148,6 +174,75 @@
       height: 56px;
       margin-right: 8px;
       text-align: center;
+    }
+  }
+
+  &__bottom-alert {
+    margin-top: 32px;
+    font-size: 12px;
+    line-height: 15px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.additional-offer-info {
+  input + label {
+    opacity: 0.5;
+  }
+}
+
+.offer-almost-done {
+  & .offer-content__buttons__button {
+    padding: 0;
+  }
+
+  &__left-field {
+    margin: 16px 0;
+
+    &__title {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    & .offer-content__block__list {
+      margin-top: 0;
+    }
+  }
+}
+
+.offer-complete {
+  margin-top: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  & .offer-content__title {
+    display: flex;
+    align-items: center;
+  }
+
+  &__title-image {
+    width: 40px;
+    margin-right: 10px;
+    height: 40px;
+    background: url("../../assets/img/success.svg") no-repeat center;
+    background-size: contain;
+  }
+
+  & .offer-content__block {
+    margin-top: 0;
+
+    &__title {
+        width: 710px;
+    }
+
+    &__subtitle {
+      margin-right: auto;
+      margin-left: auto;
+      width: 432px;
     }
   }
 }

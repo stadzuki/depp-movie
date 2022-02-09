@@ -3,19 +3,23 @@ import $api, {API_URL} from "../http/http";
 
 class FilmService {
     static async getFilms () {
-        return axios.get(`${API_URL}/api/film/films`)
+        return axios.get(`${API_URL}/api/films/all`)
     }
 
     static async getFilm (id) {
-        return $api.get(`${API_URL}/api/film/${id}`)
+        return $api.get(`/api/films/${id}`)
     }
 
     static async getFilmPortal (id) {
-        return $api.get(`${API_URL}/api/Film/${id}/portal`)
+        return $api.get(`/api/films/${id}/portal`)
     }
 
     static async getFilmExtraPost (id) {
-        return $api.get(`${API_URL}/api/Film/${id}/portalPost`)
+        return $api.get(`/api/films/${id}/portalPost`)
+    }
+
+    static sendOfferFilm () {
+        return
     }
 }
 

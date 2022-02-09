@@ -6,58 +6,89 @@ function DpTextArea ({
     getter, setter,
     placeholder, type,
     regex, isRequired,
-    disableLable, errorStack
+    disableLabel, errorStack, isNeededRefresh,
+    countryTab
 }) {
-
-    const [currentValue, setCurrentValue] = useState(getter);
     const [errors, setErrors] = useState('');
+    const isFieldRequired = isRequired !== undefined ? isRequired : true;
 
     useEffect(() => {
         if (!getter || (regex && regex.exp && getter.search(regex.exp) === -1)) {
-            errorStack((prev) => [...prev, {errorId: inputId}]);
+            addFieldError();
+            setErrors('');
         }
     }, [])
 
+    useEffect(() => {
+        if (isNeededRefresh && (!getter || (regex && regex.exp && getter.search(regex.exp) === -1))) {
+            addFieldError();
+            setErrors('');
+        }
+    }, [isNeededRefresh])
+
     function onInputChange (evt) {
         const target = evt.target;
-
-        if (regex && regex.exp) {
-            if (target.value.search(regex.exp) !== -1) {
-                setErrors('');
-                errorStack((prev) => prev.filter((error) => error.errorId !== inputId));
-            }
-        }
-
+        fieldValidator(evt);
         setter(target.value);
-        setCurrentValue(target.value);
+    }
+
+    function addFieldError () {
+        if (!isFieldRequired) return;
+
+        // let countryTabName;
+        //
+        // switch (countryTab) {
+        //     case 'ru':
+        //         countryTabName = 'На русском 🇷🇺';
+        //         break;
+        //     case 'en':
+        //         countryTabName = 'На английском 🇬🇧';
+        //         break;
+        //     case 'cn':
+        //         countryTabName = 'На китайском 🇨🇳 ';
+        //         break;
+        //
+        // }
+
+        errorStack((prev) => [...prev, {id: inputId, fieldTitle: inputTitle || placeholder}]);
+    }
+
+    function clearFieldError () {
+        setErrors('');
+        errorStack((prev) => prev.filter((error) => error.id !== inputId));
     }
 
     function fieldValidator (evt) {
         const target = evt.target;
-        setErrors('');
+
         if (regex && regex.exp) {
             if (target.value.search(regex.exp) === -1) {
                 setErrors(regex.msg || 'Поле заполнено некорректно');
-                errorStack((prev) => [...prev, {errorId: inputId}]);
-            }
+                addFieldError();
+                setter(target.value.trim());
+                return;
+            } else clearFieldError()
 
             if (regex.max && target.value.length > regex.max) {
                 setErrors('Длинна поля должна быть не более ' + regex.max + ' симовлов');
-                errorStack((prev) => [...prev, {errorId: inputId}]);
-            }
+                addFieldError();
+                setter(target.value.trim());
+                return;
+            } else clearFieldError()
 
             if (regex.min && target.value.length < regex.min) {
-                setErrors('Длинна поля должна быть не менее ' + regex.max + ' симовлов');
-                errorStack((prev) => [...prev, {errorId: inputId}]);
-            }
+                setErrors('Длинна поля должна быть не менее ' + regex.min + ' симовлов');
+                addFieldError();
+                setter(target.value.trim());
+                return;
+            } else clearFieldError()
         }
 
         setter(target.value.trim());
-        setCurrentValue(target.value.trim());
     }
 
     return (
-        <div className="dp-input-wrapper">
+        <div className="dp-textarea-wrapper">
             <div className="textarea">
                 {inputTitle
                     ? <p className="textarea__title">{inputTitle}</p>
@@ -69,7 +100,7 @@ function DpTextArea ({
                     id={inputId}
                     name={inputId}
                     type={type}
-                    value={currentValue}
+                    value={getter}
                     required={isRequired || true}
                     placeholder={placeholder}
                     onChange={onInputChange}

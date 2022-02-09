@@ -1,5 +1,6 @@
 import AsidePanel from "./components/AsidePanel/AsidePanel";
 import AdminContentWrapper from "./components/AdminContentWrapper/AdminContentWrapper";
+import AdminHeader from "./components/AdminHeader/AdminHeader";
 
 import "./admin.scss"
 
@@ -14,7 +15,7 @@ function Admin (props) {
 
     return (
         <>
-            {/*<AdminHeader />*/}
+            <AdminHeader />
             <div className="admin admin-container">
                 {/*<div className="aside-panel-wrapper">*/}
                 {/*    <AsidePanel  asideItems={adminNavItems} />*/}

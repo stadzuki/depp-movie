@@ -86,9 +86,23 @@
   &__admin-func {
     &__list {
       display: flex;
+      align-items: center;
+      font-weight: 500;
 
       &__item {
         margin-right: 25px;
+
+        &__link {
+          opacity: 0.5;
+
+          &:hover {
+            opacity: 1;
+          }
+
+          &--active {
+            opacity: 1;
+          }
+        }
 
         &:last-child {
           margin-right: 0;

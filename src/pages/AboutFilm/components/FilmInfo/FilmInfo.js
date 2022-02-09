@@ -1,6 +1,7 @@
 import {Link, NavLink} from "react-router-dom";
 import {useEffect, useState} from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import "react-perfect-scrollbar/dist/css/styles.css";
 
 import "./film-info.scss"
 

@@ -6,6 +6,11 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100vh;
+  position: relative;
+}
+
 body {
   font-family: 'Montserrat', Arial, Calibri sans-serif;
   font-size: 14px;

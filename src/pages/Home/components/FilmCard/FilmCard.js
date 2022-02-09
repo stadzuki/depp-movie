@@ -89,7 +89,7 @@ function FilmCard () {
                                 <p>Сбор средств</p>
                             </div>
                             <p className="film-card__media-button__percent">
-                                <span className="film-card__media-button__percent__count"> { currentFilm.percentCollected + '%'} </span>
+                                <span className="film-card__media-button__percent__count"> {currentFilm.percentCollected ? currentFilm.percentCollected + '%' : '-'} </span>
                                 собрано
                             </p>
                         </div>
@@ -144,7 +144,7 @@ function FilmCard () {
                                 <p>Сбор средств</p>
                             </div>
                             <p className="film-card__media-button__percent">
-                                <span className="film-card__media-button__percent__count"> { currentFilm.percentCollected || '-' + '%'} </span>
+                                <span className="film-card__media-button__percent__count"> {currentFilm.percentCollected ? currentFilm.percentCollected + '%' : '-'} </span>
                                 собрано
                             </p>
                         </div>

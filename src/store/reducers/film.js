@@ -13,21 +13,124 @@ const initialState = {
                 shortDescription: '',
                 detailedDescription: '',
                 budget: '',
+                staticPoster: [
+                    {fileId: '123', fileName: '11232123', fileSize: '12213213', fileResult: '12', fileType: '12'},
+                    {fileId: '1232', fileName: '5511232123', fileSize: '12213213', fileResult: '12', fileType: '12'},
+                ],
+                animationPoster: [],
+                isFilmAdaption: true,
+                transferDocuments: []
             },
             en: {
                 filmName: '',
                 shortDescription: '',
                 detailedDescription: '',
                 budget: '',
+                staticPoster: [
+                    {fileId: '123', fileName: '122323', fileSize: '123', fileResult: '12', fileType: '12'}
+                ],
+                animationPoster: [],
+                isFilmAdaption: false,
+                transferDocuments: []
             },
             cn: {
                 filmName: '',
                 shortDescription: '',
                 detailedDescription: '',
                 budget: '',
+                staticPoster: [
+                    {fileId: '123', fileName: '123', fileSize: '123', fileResult: '12', fileType: '12'}
+                ],
+                animationPoster: [],
+                isFilmAdaption: false,
+                transferDocuments: []
             },
         },
-        additionalInfo: {}
+        additionalInfo: {
+            ru: {
+                videoMaterial: [],
+                videoMaterialLink: '12',
+                presentationLink: '13',
+
+                directors: '14',
+                directorsFilmography: '15',
+
+                screenwriters: '123',
+                screenwritersFilmography: '123',
+
+                operators: '',
+                operatorsFilmography: '',
+
+                artists: '',
+                artistsFilmography: '',
+
+                actors: '',
+                actorsFilmography: '',
+
+                producers: '',
+                producersFilmography: '',
+
+                conceptArts: []
+            },
+            en: {
+                videoMaterial: [],
+                videoMaterialLink: 'en',
+                presentationLink: 'en12',
+
+                directors: '14',
+                directorsFilmography: '15',
+
+                screenwriters: '123',
+                screenwritersFilmography: '123',
+
+                operators: '',
+                operatorsFilmography: '',
+
+                artists: '',
+                artistsFilmography: '',
+
+                actors: '',
+                actorsFilmography: '',
+
+                producers: '',
+                producersFilmography: '',
+
+                conceptArts: []
+            },
+            cn: {
+                videoMaterial: [],
+                videoMaterialLink: 'cn12',
+                presentationLink: 'cn13',
+
+                directors: '14',
+                directorsFilmography: '15',
+
+                screenwriters: '123',
+                screenwritersFilmography: '123',
+
+                operators: '',
+                operatorsFilmography: '',
+
+                artists: '',
+                artistsFilmography: '',
+
+                actors: '',
+                actorsFilmography: '',
+
+                producers: '',
+                producersFilmography: '',
+
+                conceptArts: []
+            },
+            commonFiles: {
+                directorsFiles: [],
+                screenwritersFiles: [{fileId: '123', fileName: '1122323', fileSize: '123', fileResult: '', fileType: ''}],
+                operatorsFiles: [{fileId: '123', fileName: '2122323', fileSize: '123', fileResult: '', fileType: ''}],
+                artistsFiles: [{fileId: '123', fileName: '3122323', fileSize: '123', fileResult: '', fileType: ''}],
+                actorsFiles: [],
+                producersFiles: [],
+            },
+        }
     }
 };
 
@@ -61,6 +164,7 @@ export function film(state = initialState, action) {
 
         case constants.OFFER_FILM:
             Object.assign(state.offerFilm, payload);
+
             return {
                 ...state,
                 offerFilm: {...state.offerFilm, payload}

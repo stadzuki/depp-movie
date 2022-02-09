@@ -10,7 +10,7 @@ function FilmReviews ({film}) {
 
     return (
         <div className="film-reviews info-content">
-            {filmInfo.reviews.length
+            {filmInfo.reviews && filmInfo.reviews.length
                 ? <ul className="film-reviews__items">
                     {filmInfo.reviews.map((review, idx) => {
                         return (

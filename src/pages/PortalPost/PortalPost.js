@@ -81,6 +81,7 @@ function PortalPost (props) {
                     </div>
                 </div>
                 <DescriptionTabCtrl
+                    tabUrl={`/film/${filmId}/portal/post/${postId}/`}
                     history={props.history}
                     activeTab={props.match.params.tab}
                     filmId={filmId}

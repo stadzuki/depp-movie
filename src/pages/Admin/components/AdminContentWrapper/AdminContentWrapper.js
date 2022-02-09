@@ -1,5 +1,6 @@
 import AdminFilmList from "../AdminFilmList/AdminFilmList";
 import AdminFilmCreator from "../AdminFilmCreator/AdminFilmCreator";
+import CreateFilm from "../../../../components/CreateFilm/CreateFilm";
 
 import "./admin-content-wrapper.scss"
 
@@ -10,6 +11,8 @@ function AdminContentWrapper ({activeTab}) {
             case 'all_films':
                 return <AdminFilmList />
             case 'create_film':
+                return <CreateFilm />
+            case 'offer_film':
                 return <AdminFilmCreator />
         }
     }

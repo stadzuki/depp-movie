@@ -2,20 +2,29 @@ import "./dp-input.scss";
 import {useEffect, useRef, useState} from "react";
 
 function DpInput ({
-    inputId,  inputWidth, inputTitle,
+    inputId, inputTitle,
     getter, setter,
     placeholder, type,
-    regex, isRequired,
-    disableLable, errorStack, keepSymbol
+    regex, isRequired, subtitle,
+    disableLabel, errorStack, keepSymbol, styles, isNeededRefresh,
+    countryTab
 }) {
+    const isFieldRequired = isRequired !== undefined ? isRequired : true;
     const [errors, setErrors] = useState('');
     const input = useRef();
 
     useEffect(() => {
         if (!getter || (regex && regex.exp && getter.search(regex.exp) === -1)) {
-            errorStack((prev) => [...prev, {errorId: inputId}]);
+            addFieldError();
         }
     }, [])
+
+    useEffect(() => {
+        if (isNeededRefresh && (!getter || (regex && regex.exp && getter.search(regex.exp) === -1))) {
+            addFieldError();
+            setErrors('');
+        }
+    }, [isNeededRefresh])
 
     function onInputClick (evt) {
         if (keepSymbol) {
@@ -43,38 +52,61 @@ function DpInput ({
 
         if (keepSymbol && isNaN(parseInt(target.value))) return;
 
-        if (regex && regex.exp) {
-            if (target.value.search(regex.exp) !== -1) {
-                setErrors('');
-                errorStack((prev) => prev.filter((error) => error.errorId !== inputId));
-            }
-        }
+        fieldValidator(evt);
 
         setter(target.value);
     }
 
+    function addFieldError () {
+        if (!isFieldRequired) return;
+
+        // let countryTabName;
+        //
+        // switch (countryTab) {
+        //     case 'ru':
+        //         countryTabName = 'На русском 🇷🇺';
+        //         break;
+        //     case 'en':
+        //         countryTabName = 'На английском 🇬🇧';
+        //         break;
+        //     case 'cn':
+        //         countryTabName = 'На китайском 🇨🇳 ';
+        //         break;
+        //
+        // }
+
+        errorStack((prev) => [...prev, {id: inputId, fieldTitle: inputTitle || placeholder}]);
+    }
+
+    function clearFieldError () {
+        setErrors('');
+        errorStack((prev) => prev.filter((error) => error.id !== inputId));
+    }
+
     function fieldValidator (evt) {
         const target = evt.target;
-        setErrors('');
 
         if (regex && regex.exp) {
             if (target.value.search(regex.exp) === -1) {
                 setErrors(regex.msg || 'Поле заполнено некорректно');
-                errorStack((prev) => [...prev, {errorId: inputId}]);
+                addFieldError();
+                setter(target.value.trim());
                 return;
-            }
+            } else clearFieldError()
 
             if (regex.max && target.value.length > regex.max) {
                 setErrors('Длинна поля должна быть не более ' + regex.max + ' симовлов');
-                errorStack((prev) => [...prev, {errorId: inputId}]);
+                addFieldError();
+                setter(target.value.trim());
                 return;
-            }
+            } else clearFieldError()
 
             if (regex.min && target.value.length < regex.min) {
                 setErrors('Длинна поля должна быть не менее ' + regex.min + ' симовлов');
-                errorStack((prev) => [...prev, {errorId: inputId}]);
+                addFieldError();
+                setter(target.value.trim());
                 return;
-            }
+            } else clearFieldError()
         }
 
         setter(target.value.trim());
@@ -82,8 +114,9 @@ function DpInput ({
 
     return (
         <div className="dp-input-wrapper">
-            <div className="input" style={{width: inputWidth}}>
+            <div className="input" style={styles?.inputWrapper}>
                 <input
+                    style={styles?.input}
                     ref={input}
                     id={inputId}
                     name={inputId}
@@ -94,7 +127,7 @@ function DpInput ({
                     onChange={onInputChange}
                     onBlur={fieldValidator}
                 />
-                {!disableLable
+                {!disableLabel
                     ? <label htmlFor={inputId}>{placeholder}</label>
                     : ''
                 }
@@ -103,6 +136,7 @@ function DpInput ({
                 ? <span className="input__error">{errors}</span>
                 : ''
             }
+            {subtitle ? <p className="dp-input__subtitle">{subtitle}</p> : ''}
         </div>
     )
 }

@@ -34,7 +34,8 @@ function AdminFilmCard ({cardInfo}) {
                         </ul>
                     </div>
                 </div>
-                <div className="admin-film-card__description">{cardInfo.title || '-'} • {cardInfo.genre || '-'} • {cardInfo.year || '-'}</div>
+                <div className="admin-film-card__title">{cardInfo.title || '-'}</div>
+                <div className="admin-film-card__description">{cardInfo.time || '-'} • {cardInfo.genre || '-'} • {cardInfo.year || '-'}</div>
             </>
         )
     }

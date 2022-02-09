@@ -7,6 +7,8 @@ import {useDispatch, useSelector} from "react-redux";
 import * as filmActions from "../../store/actions/film";
 
 import "./portal.scss";
+import HtmlReader from "../../utils/HtmlReader";
+import decodeString from "../../utils/decodeString";
 
 function ParentAndChildrenContent ({parentContent, filmId, childrenContent}) {
 
@@ -81,9 +83,9 @@ function ParentAndChildrenContent ({parentContent, filmId, childrenContent}) {
 function Portal (props) {
     const filmId = props.match.params.filmId;
     const dispatch = useDispatch();
-    // const filmPortal = useSelector((store) => store.film.filmPortal);
+    const filmPortal = useSelector((store) => store.film.filmPortal);
 
-    const filmPortal = [{"id":1,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalImage","format":"3-2"},{"id":2,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalImage","format":"3-2"},{"id":3,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalImage","format":"1-1"},{"id":4,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalVideo","format":"8-1"},{"id":5,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalVideo","format":"2-3"},{"id":6,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalVideo","format":"8-3"},{"id":7,"url":"https://uran.tv/wp-content/uploads/2019/02/%D0%91%D1%8D%D0%BA%D1%81%D1%82%D0%B5%D0%B9%D0%B4%D0%B6-%D0%B4%D0%BE-%D1%81%D1%82%D0%B5%D0%B4%D0%B8%D0%BA%D0%B0%D0%BC%D0%BE%D0%BC-%D0%A3%D1%80%D0%B0%D0%BD%D0%A2%D0%92-1024x576.png","contentType":"PortalBackStage","format":"4-3"},{"id":8,"url":"https://uran.tv/wp-content/uploads/2019/02/%D0%91%D1%8D%D0%BA%D1%81%D1%82%D0%B5%D0%B9%D0%B4%D0%B6-%D0%B4%D0%BE-%D1%81%D1%82%D0%B5%D0%B4%D0%B8%D0%BA%D0%B0%D0%BC%D0%BE%D0%BC-%D0%A3%D1%80%D0%B0%D0%BD%D0%A2%D0%92-1024x576.png","contentType":"PortalBackStage","format":"4-3"},{"id":9,"url":"https://uran.tv/wp-content/uploads/2019/02/%D0%91%D1%8D%D0%BA%D1%81%D1%82%D0%B5%D0%B9%D0%B4%D0%B6-%D0%B4%D0%BE-%D1%81%D1%82%D0%B5%D0%B4%D0%B8%D0%BA%D0%B0%D0%BC%D0%BE%D0%BC-%D0%A3%D1%80%D0%B0%D0%BD%D0%A2%D0%92-1024x576.png","contentType":"PortalBackStage","format":"7-5"},{"id":10,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalText","format":"1-2"},{"id":11,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalText","format":"9-16"},{"id":12,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalText","format":"9-16"},{"id":13,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalText","format":"10-13"}]
+    // const filmPortal = [{"id":1,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalImage","format":"3-2"},{"id":2,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalImage","format":"3-2"},{"id":3,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalImage","format":"1-1"},{"id":4,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalVideo","format":"8-1"},{"id":5,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalVideo","format":"2-3"},{"id":6,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalVideo","format":"8-3"},{"id":7,"url":"https://uran.tv/wp-content/uploads/2019/02/%D0%91%D1%8D%D0%BA%D1%81%D1%82%D0%B5%D0%B9%D0%B4%D0%B6-%D0%B4%D0%BE-%D1%81%D1%82%D0%B5%D0%B4%D0%B8%D0%BA%D0%B0%D0%BC%D0%BE%D0%BC-%D0%A3%D1%80%D0%B0%D0%BD%D0%A2%D0%92-1024x576.png","contentType":"PortalBackStage","format":"4-3"},{"id":8,"url":"https://uran.tv/wp-content/uploads/2019/02/%D0%91%D1%8D%D0%BA%D1%81%D1%82%D0%B5%D0%B9%D0%B4%D0%B6-%D0%B4%D0%BE-%D1%81%D1%82%D0%B5%D0%B4%D0%B8%D0%BA%D0%B0%D0%BC%D0%BE%D0%BC-%D0%A3%D1%80%D0%B0%D0%BD%D0%A2%D0%92-1024x576.png","contentType":"PortalBackStage","format":"4-3"},{"id":9,"url":"https://uran.tv/wp-content/uploads/2019/02/%D0%91%D1%8D%D0%BA%D1%81%D1%82%D0%B5%D0%B9%D0%B4%D0%B6-%D0%B4%D0%BE-%D1%81%D1%82%D0%B5%D0%B4%D0%B8%D0%BA%D0%B0%D0%BC%D0%BE%D0%BC-%D0%A3%D1%80%D0%B0%D0%BD%D0%A2%D0%92-1024x576.png","contentType":"PortalBackStage","format":"7-5"},{"id":10,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalText","format":"1-2"},{"id":11,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalText","format":"9-16"},{"id":12,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalText","format":"9-16"},{"id":13,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalText","format":"10-13"}]
     // const filmPortal = [{"id":2,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalImage","format":"3-2"},{"id":3,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalImage","format":"1-1"},{"id":5,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalVideo","format":"2-3"},{"id":8,"url":"https://uran.tv/wp-content/uploads/2019/02/%D0%91%D1%8D%D0%BA%D1%81%D1%82%D0%B5%D0%B9%D0%B4%D0%B6-%D0%B4%D0%BE-%D1%81%D1%82%D0%B5%D0%B4%D0%B8%D0%BA%D0%B0%D0%BC%D0%BE%D0%BC-%D0%A3%D1%80%D0%B0%D0%BD%D0%A2%D0%92-1024x576.png","contentType":"PortalBackStage","format":"4-3"},{"id":18,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalText","format":"9-16"},{"id":19,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalText","format":"9-16"},{"id":20,"url":"https://uran.tv/wp-content/uploads/2019/02/%D0%91%D1%8D%D0%BA%D1%81%D1%82%D0%B5%D0%B9%D0%B4%D0%B6-%D0%B4%D0%BE-%D1%81%D1%82%D0%B5%D0%B4%D0%B8%D0%BA%D0%B0%D0%BC%D0%BE%D0%BC-%D0%A3%D1%80%D0%B0%D0%BD%D0%A2%D0%92-1024x576.png","contentType":"PortalBackStage","format":"7-5"},{"id":21,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalText","format":"1-2"},{"id":22,"url":"https://uran.tv/wp-content/uploads/2019/02/%D0%91%D1%8D%D0%BA%D1%81%D1%82%D0%B5%D0%B9%D0%B4%D0%B6-%D0%B4%D0%BE-%D1%81%D1%82%D0%B5%D0%B4%D0%B8%D0%BA%D0%B0%D0%BC%D0%BE%D0%BC-%D0%A3%D1%80%D0%B0%D0%BD%D0%A2%D0%92-1024x576.png","contentType":"PortalBackStage","format":"4-3"},{"id":23,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalVideo","format":"8-1"},{"id":24,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalImage","format":"3-2"},{"id":25,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalVideo","format":"8-3"},{"id":29,"url":"https://thumb.cloud.mail.ru/thumb/xw1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202021-09-05%20171411.png","contentType":"PortalText","format":"10-13"}]
 
     useEffect(() => {
@@ -98,6 +100,13 @@ function Portal (props) {
 
     function onCategoryClick () {
         const portalPosts = document.querySelector('.portal__content__boxes__box__children');
+    }
+
+    function insertHTML () {
+        const htmlReader = new HtmlReader("<html lang=\"en\">\n<head>\n  <style>\n    .color-red {\n      color: red;\n    }\n  </style>\n</head>\n<body>\n  <h1 class=\"color-red\">some text</h1>\n</body>\n</html>");
+        htmlReader.apply();
+
+        return {__html: decodeString(htmlReader.body)};
     }
 
     function GenerateBoxes () {
@@ -163,6 +172,8 @@ function Portal (props) {
                         </span>
                         <span className="portal__header__nav__element portal__header__nav__element--active">Портал</span>
                     </div>
+                    <div className={`portal__content__boxes__box portal__content__boxes__box--1-1`} dangerouslySetInnerHTML={insertHTML()}>
+                    </div>
                     <div className="portal__header__text">
                         <p className="portal__header__text__title">Портал: Интерстеллар</p>
                         <p className="portal__header__text__subtitle">Еженедельно обновляемый канал фильма.</p>
@@ -201,25 +212,8 @@ function Portal (props) {
                     <ul className="portal__content__boxes">
                         {filmPortal && filmPortal.length
                             ? <GenerateBoxes />
-                            : 'skeleton'
+                            : <p style={{margin: '30px auto'}}>Контент отсутствует</p>
                         }
-                        {/*<li className="portal__content__boxes__box portal__content__boxes__box--3-2 mr-24">1</li>*/}
-                        {/*<li className="portal__content__boxes__box portal__content__boxes__box--3-2">2</li>*/}
-                        {/*<li className="portal__content__boxes__box portal__content__boxes__box--1-1 mr-24">3</li>*/}
-                        {/*<li className="portal__content__boxes__box portal__content__boxes__box--8-1">4</li>*/}
-                        {/*<div className="portal__content__boxes__include-children">*/}
-                        {/*    <li className="portal__content__boxes__box portal__content__boxes__box--2-3 portal__content__boxes__include-children__parent">5</li>*/}
-                        {/*    <div className="portal__content__boxes__include-children__box-children">*/}
-                        {/*        <li className="portal__content__boxes__box portal__content__boxes__include-children__box-children--8-3">6</li>*/}
-                        {/*        <li className="portal__content__boxes__box portal__content__boxes__include-children__box-children--4-3">7</li>*/}
-                        {/*        <li className="portal__content__boxes__box portal__content__boxes__include-children__box-children--4-3">8</li>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
-                        {/*<li className="portal__content__boxes__box portal__content__boxes__box--7-5 mr-24">9</li>*/}
-                        {/*<li className="portal__content__boxes__box portal__content__boxes__box--1-2">10</li>*/}
-                        {/*<li className="portal__content__boxes__box portal__content__boxes__box--9-16 mr-24">11</li>*/}
-                        {/*<li className="portal__content__boxes__box portal__content__boxes__box--9-16 mr-24">12</li>*/}
-                        {/*<li className="portal__content__boxes__box portal__content__boxes__box--10-13">13</li>*/}
                     </ul>
                 </div>
             </div>

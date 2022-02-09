@@ -42,21 +42,148 @@ function ProfileData () {
     // Inputs store
     const [profileInputs, setProfileInputs] = useState({
         userData: [
-            {id: 'user-name', width: 432, regex: /\w/, type: 'text', value: '', getter: userName, setter: setUserName, placeholder: 'Имя и Фамилия'},
-            {id: 'user-phone', width: 204, regex: /\w/, type: 'text', value: '', getter: userPhone, setter: setUserPhone, placeholder: 'Телефон'}
+            {
+                id: 'user-name',
+                styles: {
+                    inputWrapper: {
+                        width: 432
+                    }
+                },
+                regex: /\w/,
+                type: 'text',
+                value: '',
+                getter: userName,
+                setter: setUserName,
+                placeholder: 'Имя и Фамилия'},
+            {
+                id: 'user-phone',
+                styles: {
+                    inputWrapper: {
+                        width: 204
+                    }
+                },
+                regex: /\w/,
+                type: 'text',
+                value: '',
+                getter: userPhone,
+                setter: setUserPhone,
+                placeholder: 'Телефон'
+            }
         ],
         userDelivery: [
-            {id: 'user-address-title', width: 1002, value: '', getter: newAddressTitle, setter: setNewAddressTitle, placeholder: 'Название адреса'},
-            {id: 'user-country', width: 318, value: '', getter: userCountry, setter: setUserCountry, placeholder: 'Страна', useSelect: true},
-            {id: 'user-street', width: 318, regex: /\w/, type: 'text', value: '', getter: userStreet, setter: setUserStreet, placeholder: 'Улица'},
-            {id: 'user-zipcode', width: 318, regex: /\w/, type: 'text', value: '', getter: userZipcode, setter: setUserZipcode, placeholder: 'Почтовый индекс'},
-            {id: 'user-city', width: 318, regex: /\w/, type: 'text', value: '', getter: userCity, setter: setUserCity, placeholder: 'Город'},
-            {id: 'user-home', width: 147, regex: /\w/, type: 'text', value: '', getter: userHome, setter: setUserHome, placeholder: 'Дом'},
-            {id: 'user-home-number', width: 147, regex: /\w/, type: 'text', value: '', getter: userHomeNumber, setter: setUserHomeNumber, placeholder: 'Квартира'}
+            {
+                id: 'user-address-title',
+                styles: {
+                    inputWrapper: {
+                        width: 1002
+                    }
+                },
+                value: '',
+                getter: newAddressTitle,
+                setter: setNewAddressTitle,
+                placeholder: 'Название адреса'},
+            {
+                id: 'user-country',
+                styles: {
+                    inputWrapper: {
+                        width: 318
+                    }
+                },
+                value: '',
+                getter: userCountry,
+                setter: setUserCountry,
+                placeholder: 'Страна',
+                useSelect: true},
+            {
+                id: 'user-street',
+                styles: {
+                    inputWrapper: {
+                        width: 318
+                    }
+                },
+                regex: /\w/,
+                type: 'text',
+                value: '', getter: userStreet,
+                setter: setUserStreet,
+                placeholder: 'Улица'},
+            {
+                id: 'user-zipcode',
+                styles: {
+                    inputWrapper: {
+                        width: 318
+                    }
+                },
+                regex: /\w/,
+                type: 'text',
+                value: '', getter: userZipcode,
+                setter: setUserZipcode,
+                placeholder: 'Почтовый индекс'},
+            {
+                id: 'user-city',
+                styles: {
+                    inputWrapper: {
+                        width: 318
+                    }
+                },
+                regex: /\w/,
+                type: 'text',
+                value: '', getter: userCity,
+                setter: setUserCity,
+                placeholder: 'Город'},
+            {
+                id: 'user-home',
+                styles: {
+                    inputWrapper: {
+                        width: 147
+                    }
+                },
+                regex: /\w/,
+                type: 'text',
+                value: '',
+                getter: userHome,
+                setter: setUserHome,
+                placeholder: 'Дом'},
+            {
+                id: 'user-home-number',
+                styles: {
+                    inputWrapper: {
+                        width: 147
+                    }
+                },
+                regex: /\w/,
+                type: 'text',
+                value: '',
+                getter: userHomeNumber,
+                setter: setUserHomeNumber,
+                placeholder: 'Квартира'}
         ],
         userPassword: [
-            {id: 'user-password', width: 318, regex: /\w/, type: 'password', value: '', getter: userOldPassword, setter: setUserOldPassword, placeholder: 'Текущий пароль'},
-            {id: 'user-re-password', width: 318, regex: /\w/, type: 'password', value: '', getter: userNewPassword, setter: setUserNewPassword, placeholder: 'Новый пароль'}
+            {
+                id: 'user-password',
+                styles: {
+                    inputWrapper: {
+                        width: 318
+                    }
+                },
+                regex: /\w/,
+                type: 'password',
+                value: '',
+                getter: userOldPassword,
+                setter: setUserOldPassword,
+                placeholder: 'Текущий пароль'},
+            {
+                id: 'user-re-password',
+                styles: {
+                    inputWrapper: {
+                        width: 318
+                    }
+                },
+                regex: /\w/,
+                type: 'password',
+                value: '',
+                getter: userNewPassword,
+                setter: setUserNewPassword,
+                placeholder: 'Новый пароль'}
         ]
     });
 
@@ -166,7 +293,7 @@ function ProfileData () {
                 onEditDataClick('', setUserPasswordEdit);
             })
             .catch((error) => {
-                console.log('cannot set user password', error)
+                console.error('cannot set user password', error)
             })
     }
 
@@ -287,7 +414,7 @@ function ProfileData () {
                             {profileInputs?.userData.map((input, id) => (
                                 <div className="block__input" key={id}>
                                     <DpInput
-                                        inputWidth={input.width}
+                                        styles={input.styles}
                                         inputId={input.id}
                                         inputValue={input.value}
                                         regex={input.regex}
@@ -348,7 +475,7 @@ function ProfileData () {
                             {profileInputs.userDelivery.map((input, id) => (
                                 <div className="block__input" key={id}>
                                     <DpInput
-                                        inputWidth={input.width}
+                                        styles={input.styles}
                                         inputId={input.id}
                                         inputValue={input.value}
                                         regex={input.regex}
@@ -400,7 +527,7 @@ function ProfileData () {
                         {profileInputs.userPassword.map((input, id) => (
                             <div className="block__input" key={id}>
                                 <DpInput
-                                    inputWidth={input.width}
+                                    styles={input.styles}
                                     inputId={input.id}
                                     inputValue={input.value}
                                     regex={input.regex}

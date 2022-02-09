@@ -3,16 +3,15 @@ import axios from "axios";
 
 class UserService {
     static async getUserProfileData () {
-        return $api.get(`${API_URL}/api/user/userProfile`);
+        return $api.get(`/api/users/profile`);
     }
 
     static async saveUserProfileData (userProfileData) {
-        console.log(userProfileData)
-        return $api.put(`${API_URL}/api/user/userProfile`, userProfileData);
+        return $api.put(`/api/users/profile`, userProfileData);
     }
 
     static async changeUserPassword (passwords) {
-        return $api.post(`${API_URL}/api/user/changePassword`, passwords)
+        return $api.post(`/api/user/changePassword`, passwords)
     }
 }
 

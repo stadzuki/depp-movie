@@ -8,6 +8,11 @@
   justify-content: space-between !important;
 }
 
+.df-al-center {
+  display: flex !important;
+  align-items: center !important;
+}
+
 .mt-auto {
   margin-top: auto !important;
 }
@@ -16,8 +21,16 @@
   margin-right: 24px;
 }
 
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
 .mt-40 {
   margin-top: 40px !important;
+}
+
+.mb-12 {
+  margin-bottom: 12px !important;
 }
 
 .visible {

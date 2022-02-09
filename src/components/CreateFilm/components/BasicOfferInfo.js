@@ -1,5 +1,8 @@
-function BasicOfferInfo ({offerInfo, saveContent, goNext}) {
+import {useState} from "react";
 
+function BasicOfferInfo ({offerInfo, saveStepContent, loadNextStep}) {
+    const KEY_IN_STORE = 'requestion';
+    const [offerBy, setOfferBy] = useState('individual');
 
     const requiredMaterial = [
         {title: 'Название фильма'},
@@ -18,14 +21,17 @@ function BasicOfferInfo ({offerInfo, saveContent, goNext}) {
     ];
 
     function onRequestionChange (request) {
-        if (offerInfo.requestion !== request) {
-            saveContent('requestion', request);
+        if (offerBy !== request) {
+            setOfferBy(request);
         }
+        // if (offerInfo.requestion !== request) {
+        //     saveStepContent('requestion', request);
+        // }
     }
 
-    function loadNextStep (evt) {
+    function goToNextStep (evt) {
         evt.preventDefault();
-        goNext();
+        loadNextStep(KEY_IN_STORE, offerBy);
     }
 
     return (
@@ -44,7 +50,7 @@ function BasicOfferInfo ({offerInfo, saveContent, goNext}) {
                         type="radio"
                         name="offer_by"
                         onChange={() => onRequestionChange('individual')}
-                        checked={offerInfo.requestion === 'individual'}
+                        checked={offerBy === 'individual'}
                     />
                     <span className="offer-content__form__inner__input__radio"></span>
                     <div className="offer-content__form__inner__block">
@@ -58,7 +64,7 @@ function BasicOfferInfo ({offerInfo, saveContent, goNext}) {
                         type="radio"
                         name="offer_by"
                         onChange={() => onRequestionChange('company')}
-                        checked={offerInfo.requestion === 'company'}
+                        checked={offerBy === 'company'}
                     />
                     <span className="offer-content__form__inner__input__radio"></span>
                     <div className="offer-content__form__inner__block">
@@ -112,7 +118,7 @@ function BasicOfferInfo ({offerInfo, saveContent, goNext}) {
             <div className="offer-content__buttons">
                 <button
                     className="offer-content__buttons__button dp-button dp-button__default dp-button__color--light-blue"
-                    onClick={(evt) => loadNextStep(evt)}
+                    onClick={(evt) => goToNextStep(evt)}
                 >Заполнить заявку</button>
                 <a className="offer-content__buttons__button dp-button dp-button__color--gray">Скачать пример</a>
             </div>

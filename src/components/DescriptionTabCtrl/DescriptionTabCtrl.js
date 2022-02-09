@@ -5,7 +5,7 @@ import FilmReviews from "../../pages/AboutFilm/components/FilmReviews/FilmReview
 
 import "./description-tab-ctrl.scss";
 
-function DescriptionTabCtrl ({filmId, activeTab, history, tabData, firstTabData, secondTabData, thirdTabData, tabTitle}) {
+function DescriptionTabCtrl ({filmId, activeTab, history, tabData, firstTabData, secondTabData, thirdTabData, tabTitle, tabUrl}) {
     const navFilmDescRef = useRef();
     const [bottomContent, setBottomContent] = useState(activeTab|| 'description');
 
@@ -27,7 +27,7 @@ function DescriptionTabCtrl ({filmId, activeTab, history, tabData, firstTabData,
         if (component === bottomContent) return 1;
 
         if (history) {
-            history.push(`/about_film/${filmId}/${component}`);
+            history.push(`${tabUrl}${component}`);
         }
 
 

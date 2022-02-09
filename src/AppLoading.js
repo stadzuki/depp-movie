@@ -14,18 +14,15 @@ function AppLoading () {
         if (token) {
             AuthService.checkIfTokenAvaliable()
                 .then((response) => {
+                    console.log(response)
                     dispatch(action.changeUserAuntification(true));
+                    setAppReady(true);
                 })
                 .catch((error) => {
                     dispatch(action.changeUserAuntification(false));
                     setAppReady(true);
                     console.error('cannot authorize user', error);
                 })
-                .finally(() => {
-                    dispatch(action.changeUserAuntification(false));
-                    setAppReady(true);
-                })
-            setAppReady(true);
         } else {
             dispatch(action.changeUserAuntification(false));
             setAppReady(true);

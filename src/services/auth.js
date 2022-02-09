@@ -3,25 +3,25 @@ import axios from "axios";
 
 class AuthService {
     static async login (login, password) {
-        return $api.post(`${API_URL}/api/user/login`, {login, password})
+        return $api.post(`/api/users/login`, {login, password})
     }
 
     static async checkIfTokenAvaliable () {
-        return $api.get('/api/user/credentials');
+        return $api.get('/api/users/credentials');
     }
 
     static async registration (login, password, email) {
-        return axios.post(`${API_URL}/api/user/register`, {login, password, email})
+        return axios.post(`${API_URL}/api/users/register`, {login, password, email})
     }
 
     static async registrationByGoogle ({accessToken}) {
-        return axios.get(`${API_URL}/api/user/google`, {
+        return axios.get(`${API_URL}/api/users/google`, {
             headers: {'Authorization': accessToken}
         });
     }
 
     static async registrationByFacebook ({accessToken}) {
-        return axios.get(`${API_URL}/api/user/facebook`, {
+        return axios.get(`${API_URL}/api/users/facebook`, {
             headers: {'Authorization': accessToken}
         })
     }

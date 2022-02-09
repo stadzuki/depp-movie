@@ -62,35 +62,37 @@ function FilmCreator ({film}) {
                     useRouting={false}
                 />
             </div>
-            <div ref={creators} className="info-content__inner">
-                {filmInfo && filmInfo.length
-                    ?
-                        filmInfo.map((person, id) => {
-                            return (
-                                <div key={id} className="info-content__inner__block--flex" id={person.id}>
-                                    <p className="info-content__inner__block__title">{person.title}</p>
-                                    <div className="info-content__inner__block__persons">
-                                        {person.data.map((pers, idx) => {
-                                            return (
-                                                <div key={idx} className="info-content__inner__block__person">
-                                                    <div className="info-content__inner__block__img">
-                                                        {pers.photoURL
-                                                            ? <img src={pers.photoURL} className="img-in-block" alt="person"/>
-                                                            : <div className="actor-img-plug"></div>
-                                                        }
-                                                    </div>
-                                                    <a href={pers.url} className="info-content__inner__block__description--actor">{pers.fio}</a>
-                                                    <p className="info-content__inner__block__description--actor-role">{pers.role}</p>
+            {filmInfo && filmInfo.length
+                ?
+                <div ref={creators} className="info-content__inner">
+                    {filmInfo.map((person, id) => {
+                        return (
+                            <div key={id} className="info-content__inner__block--flex" id={person.id}>
+                                <p className="info-content__inner__block__title">{person.title}</p>
+                                <div className="info-content__inner__block__persons">
+                                    {person.data.map((pers, idx) => {
+                                        return (
+                                            <div key={idx} className="info-content__inner__block__person">
+                                                <div className="info-content__inner__block__img">
+                                                    {pers.photoURL
+                                                        ? <img src={pers.photoURL} className="img-in-block"
+                                                               alt={pers.fio}/>
+                                                        : <div className="actor-img-plug"></div>
+                                                    }
                                                 </div>
-                                            )
-                                        })}
-                                    </div>
+                                                <a href={pers.url}
+                                                   className="info-content__inner__block__description--actor">{pers.fio}</a>
+                                                <p className="info-content__inner__block__description--actor-role">{pers.role}</p>
+                                            </div>
+                                        )
+                                    })}
                                 </div>
-                            )
-                        })
-                    : <p style={{margin: "0 auto"}}>Не удалось загрузить информацию о создателях или они отсутсвуют</p>
-                }
-            </div>
+                            </div>
+                        )
+                    })}
+                </div>
+                : <p style={{margin: "50px auto"}}>Не удалось загрузить информацию о создателях или они отсутсвуют</p>
+            }
         </div>
     )
 }

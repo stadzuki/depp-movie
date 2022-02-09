@@ -22,7 +22,7 @@ function AppRouting () {
     }, [userAuth])
 
     function requireAuth (Component, props) {
-        // if (!isAuth && !userAuth) return <Redirect to="/auth"/>
+        if (!isAuth && !userAuth) return <Redirect to="/auth"/>
 
         return <Component {...props}/>
     }
@@ -115,6 +115,7 @@ function AppRouting () {
                     render={(props) => requireAuth(ProfileWrapper, props)}
                 />
                 <Route
+                    exact
                     path="/panel/offer_film"
                     render={(props) => requireAuth(OfferFilmWrapper, props)}
                 />

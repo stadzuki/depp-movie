@@ -35,6 +35,7 @@ function AboutFilm (props) {
             <div className="about-film about-film__wrapper main-container">
                 <FilmInfo film={filmInfo[filmId]}/>
                 <DescriptionTabCtrl
+                    tabUrl={`/about_film/${filmId}/`}
                     history={props.history}
                     activeTab={props.match.params.tab}
                     filmId={filmId}

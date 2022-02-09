@@ -49,6 +49,7 @@ function AuntificateModal ({onCloseModal}) {
             })
             .catch((error) => {
                 console.error(error);
+                loginError.current.classList.add('visible');
             })
     }
 
@@ -56,7 +57,7 @@ function AuntificateModal ({onCloseModal}) {
         setter(text);
     }
 
-    function CurrentModal () {
+    function currentModal () {
         if (isRegistrationModalShow) {
             return <RegistrationModal
                         onCloseModal={onRegistrationModalClose}
@@ -101,7 +102,7 @@ function AuntificateModal ({onCloseModal}) {
                             <input
                                 className="form__input"
                                 type="text"
-                                placeholder="Почта"
+                                placeholder="Логин"
                                 value={userLogin}
                                 onChange={(evt) => onFormChange(evt.target.value, setUserLogin)}
                             />
@@ -110,9 +111,10 @@ function AuntificateModal ({onCloseModal}) {
                                 type="password"
                                 placeholder="Пароль"
                                 value={userPassword}
-                                onChange={(evt) => onFormChange(evt.target.value, setUserPassword())}
+                                onChange={(evt) => onFormChange(evt.target.value, setUserPassword)}
                             />
                             <p className="form__error-message">Почта или Пароль не верны</p>
+                            <p ref={loginError} className="form__error-message">Почта или Пароль не верны</p>
                             <button className="modal__login-button form__button dp-button__default dp-button__color--light-blue" onClick={onLoginClick}>Войти</button>
                         </form>
                         <div className="modal__auth-bottom">
@@ -126,54 +128,55 @@ function AuntificateModal ({onCloseModal}) {
     }
 
     return (
-        <div className="modal-wrapper">
-            <div className="overlay" onClick={() => {if (onCloseModal) onCloseModal(false)}}></div>
-            <div className="modal fadeInDownBig">
-                <div className="modal__container">
-                    <p className="modal__title">Вход</p>
-                    <ul className="modal__social-list">
-                        <li className="modal__social-list__item">
-                            <img src="/img/social/google.svg" alt="google" width="50" height="50"/>
-                        </li>
-                        <li className="modal__social-list__item">
-                            <img src="/img/social/facebook.svg" alt="facebook" width="50" height="50"/>
-                        </li>
-                        <li className="modal__social-list__item">
-                            <img src="/img/social/twitter.svg" alt="twitter" width="50" height="50"/>
-                        </li>
-                        <li className="modal__social-list__item">
-                            <img src="/img/social/vk.svg" alt="vk" width="50" height="50"/>
-                        </li>
-                        <li className="modal__social-list__item">
-                            <img src="/img/social/wechat.svg" alt="wechat" width="50" height="50"/>
-                        </li>
-                    </ul>
-                    <p className="modal__or-separator">Или</p>
-                    <form className="form">
-                        <input
-                            className="form__input"
-                            type="text"
-                            placeholder="Почта"
-                            value={userLogin}
-                            onChange={(evt) => onFormChange(evt.target.value, setUserLogin)}
-                        />
-                        <input
-                            className="form__input"
-                            type="password"
-                            placeholder="Пароль"
-                            value={userPassword}
-                            onChange={(evt) => onFormChange(evt.target.value, setUserPassword)}
-                        />
-                        <p ref={loginError} className="form__error-message">Почта или Пароль не верны</p>
-                        <button className="modal__login-button form__button dp-button__default dp-button__color--light-blue" onClick={onLoginClick}>Войти</button>
-                    </form>
-                    <div className="modal__auth-bottom">
-                        <span className="modal__auth-bottom__button dp-text__blue" onClick={onResetPasswordClick}>Забыл пароль</span>
-                        <span className="modal__auth-bottom__button dp-text__blue" onClick={onRegistrationClick}>Регистрация</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+        currentModal()
+        // <div className="modal-wrapper">
+        //     <div className="overlay" onClick={() => {if (onCloseModal) onCloseModal(false)}}></div>
+        //     <div className="modal fadeInDownBig">
+        //         <div className="modal__container">
+        //             <p className="modal__title">Вход</p>
+        //             <ul className="modal__social-list">
+        //                 <li className="modal__social-list__item">
+        //                     <img src="/img/social/google.svg" alt="google" width="50" height="50"/>
+        //                 </li>
+        //                 <li className="modal__social-list__item">
+        //                     <img src="/img/social/facebook.svg" alt="facebook" width="50" height="50"/>
+        //                 </li>
+        //                 <li className="modal__social-list__item">
+        //                     <img src="/img/social/twitter.svg" alt="twitter" width="50" height="50"/>
+        //                 </li>
+        //                 <li className="modal__social-list__item">
+        //                     <img src="/img/social/vk.svg" alt="vk" width="50" height="50"/>
+        //                 </li>
+        //                 <li className="modal__social-list__item">
+        //                     <img src="/img/social/wechat.svg" alt="wechat" width="50" height="50"/>
+        //                 </li>
+        //             </ul>
+        //             <p className="modal__or-separator">Или</p>
+        //             <form className="form">
+        //                 <input
+        //                     className="form__input"
+        //                     type="text"
+        //                     placeholder="Почта"
+        //                     value={userLogin}
+        //                     onChange={(evt) => onFormChange(evt.target.value, setUserLogin)}
+        //                 />
+        //                 <input
+        //                     className="form__input"
+        //                     type="password"
+        //                     placeholder="Пароль"
+        //                     value={userPassword}
+        //                     onChange={(evt) => onFormChange(evt.target.value, setUserPassword)}
+        //                 />
+        //                 <p ref={loginError} className="form__error-message">Почта или Пароль не верны</p>
+        //                 <button className="modal__login-button form__button dp-button__default dp-button__color--light-blue" onClick={onLoginClick}>Войти</button>
+        //             </form>
+        //             <div className="modal__auth-bottom">
+        //                 <span className="modal__auth-bottom__button dp-text__blue" onClick={onResetPasswordClick}>Забыл пароль</span>
+        //                 <span className="modal__auth-bottom__button dp-text__blue" onClick={onRegistrationClick}>Регистрация</span>
+        //             </div>
+        //         </div>
+        //     </div>
+        // </div>
     )
 
     // return <CurrentModal/>

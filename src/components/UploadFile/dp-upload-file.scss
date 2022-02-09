@@ -96,6 +96,22 @@
           transform-origin: 100% 0%;
           animation: kf_loading_line 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0s infinite;
 
+          &__file-name {
+            font-size: 12px;
+            opacity: 0.5;
+            position: absolute;
+            bottom: 105%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            max-width: 100%;
+
+            &--error {
+              opacity: 1;
+              color: #ce3434;
+            }
+          }
+
           &__inner {
             position: absolute;
             top: 0px;

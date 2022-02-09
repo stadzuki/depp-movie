@@ -70,7 +70,7 @@ function FilmDescription ({film}) {
                             <div className="description-content__wrapper">
                                 <p className="description-content__title">Официальные ресурсы</p>
                                 <p className="description-content__subtitle">
-                                    {filmInfo && filmInfo.links
+                                    {filmInfo && filmInfo.links && filmInfo.links.length
                                         ? filmInfo?.links.map((link, id) => {
                                             return (
                                                 <span key={id} className="film-description__official-res dp-text__blue dp-text__blue--arrow-link">
@@ -78,7 +78,7 @@ function FilmDescription ({film}) {
                                                 </span>
                                             )
                                         })
-                                        : ''
+                                        : 'Отсутствуют'
                                     }
                                 </p>
                             </div>
