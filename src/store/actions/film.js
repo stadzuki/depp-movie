@@ -24,3 +24,13 @@ export const offerFilm = (payload) => ({
    type: constants.OFFER_FILM,
    payload
 });
+
+export const filmFilters = (payload) => ({
+    type: constants.FILM_FILTERS,
+    payload
+})
+
+export const portalFilters = (payload) => ({
+    type: constants.PORTAL_FILTERS,
+    payload
+})

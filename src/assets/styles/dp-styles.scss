@@ -22,9 +22,9 @@
 
 .dp-button {
   &__default {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 20px;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 22px;
     color: #FFFFFF;
   }
 
@@ -68,6 +68,11 @@
     &--gray {
       color: #fff;
       background-color: #171717;
+    }
+
+    &--dark-gray {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
     }
   }
 

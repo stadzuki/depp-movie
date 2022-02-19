@@ -3,7 +3,8 @@ import {Link} from "react-router-dom";
 import Header from "../../components/Header/Header";
 import DescriptionTabCtrl from "../../components/DescriptionTabCtrl/DescriptionTabCtrl";
 import {useEffect, useState} from "react";
-import FilmService from "../../services/film";
+import FilmService from "../../services/FilmService";
+import LoaderService from "../../services/LoaderService";
 
 function PortalPost (props) {
     const postId = props.match.params.postId || -1;
@@ -12,9 +13,12 @@ function PortalPost (props) {
     const [postContent, setPostContent] = useState(null);
 
     useEffect(() => {
+        LoaderService.show(true);
+
         FilmService.getFilmExtraPost(postId)
             .then((response) => {
                 setPostContent(response.data);
+                LoaderService.show(false);
             })
             .catch((error) => {
                 console.error('cannot load film portal post', error)

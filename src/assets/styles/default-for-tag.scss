@@ -21,6 +21,11 @@ ul {
 button {
   border: none;
   cursor: pointer;
-  font-family: 'Montserrat', Arial, Calibri sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+}
+
+input::placeholder {
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
 }

@@ -1,9 +1,10 @@
 import {useRef, useState} from "react";
 import RegistrationModal from "./RegistrationModal";
 import ResetPasswordModal from "./ResetPasswordModal";
-import AuthService from "../../services/auth";
+import AuthService from "../../services/AuthService";
 import {useDispatch} from "react-redux";
 import * as actions from "../../store/actions/user";
+import LoaderService from "../../services/LoaderService";
 
 function AuntificateModal ({onCloseModal}) {
     const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function AuntificateModal ({onCloseModal}) {
 
     function onLoginClick (evt) {
         evt.preventDefault();
+        LoaderService.show(true);
         loginError.current.classList.remove('visible');
 
         AuthService.login(userLogin, userPassword)
@@ -45,10 +47,12 @@ function AuntificateModal ({onCloseModal}) {
                     loginError.current.classList.add('visible');
                 }
 
+                LoaderService.show(false);
                 dispatch(actions.changeUserAuntification(response.data.isSuccessful));
             })
             .catch((error) => {
                 console.error(error);
+                LoaderService.show(false);
                 loginError.current.classList.add('visible');
             })
     }

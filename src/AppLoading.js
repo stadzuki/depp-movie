@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import * as action from "./store/actions/user";
-import AuthService from "./services/auth";
+import AuthService from "./services/AuthService";
 import AppRouting from "./AppRouting";
 import Loader from "./components/Loader";
 
@@ -14,7 +14,6 @@ function AppLoading () {
         if (token) {
             AuthService.checkIfTokenAvaliable()
                 .then((response) => {
-                    console.log(response)
                     dispatch(action.changeUserAuntification(true));
                     setAppReady(true);
                 })

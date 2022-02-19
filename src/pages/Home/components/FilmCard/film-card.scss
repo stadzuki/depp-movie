@@ -39,16 +39,16 @@
 
   &__title {
     &__text {
-      margin-top: 15px;
-      font-weight: 600;
-      font-size: 38px;
-      line-height: 46px;
+      font-weight: normal;
+      font-size: 42px;
+      line-height: 48px;
     }
 
     &__sub {
-      margin-top: 5px;
-      font-size: 14px;
-      line-height: 17px;
+      margin-top: 2px;
+      font-weight: normal;
+      font-size: 15px;
+      line-height: 22px;
       color: rgba(255, 255, 255, .5);
 
       span {
@@ -68,7 +68,6 @@
   }
 
   &__action-buttons {
-    margin-top: 25px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -106,9 +105,13 @@
   }
 
   &__description {
-    margin-top: 23px;
-    font-size: 16px;
-    line-height: 24px;
+    margin-top: 12px;
+
+    &__text {
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 24px;
+    }
 
     &__text__show-more {
       cursor: pointer;
@@ -129,9 +132,8 @@
     display: flex;
     max-width: 283px;
     width: auto;
-    margin-top: 23px;
+    margin-top: 8px;
     justify-content: center;
-    margin-bottom: 60px;
 
     &:hover {
       opacity: .8;
@@ -157,6 +159,8 @@
 
 .movie-info {
   display: flex;
+  margin-top: 24px;
+  margin-bottom: 68px;
 }
 
 .movie-info-full-view {
@@ -173,7 +177,6 @@
   .film-card__action-buttons {
     width: 318px;
     flex-wrap: wrap;
-    margin-bottom: 23px;
   }
 
   .navlink-button {

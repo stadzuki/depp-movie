@@ -28,14 +28,8 @@ function CreateFilm () {
     const offerFilmInfo = useSelector((store) => store.film.offerFilm);
     const [currentTab, setCurrentTab] = useState(tabs[0]);
 
-    function saveStepContent (key, data, childKey = null) {
+    function saveStepContent (key, data) {
         if (offerFilmInfo.hasOwnProperty(key) && JSON.stringify(offerFilmInfo[key]) !== JSON.stringify(data)) {
-            // if (childKey) {
-            //     offerFilmInfo[key][childKey]
-            //     dispatch(filmActions.offerFilm({[key]: data}));
-            //     return;
-            // }
-
             dispatch(filmActions.offerFilm({[key]: data}));
         }
     }

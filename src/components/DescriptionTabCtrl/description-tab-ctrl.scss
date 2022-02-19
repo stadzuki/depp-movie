@@ -1,6 +1,10 @@
 .description-content {
   display: flex;
 
+  &__inner-html {
+    margin-top: 24px;
+  }
+
   &__left{
     &--margin {
       margin-right: 107px;

@@ -16,9 +16,9 @@ function FilmStep ({onCloseModal, steps}) {
                             ? 'film-step__main-title' : 'film-step__title'
 
                         return (
-                            <div className={wrapperClass}>
-                                <p className={titleClass}>Подготовка к съемкам</p>
-                                <p className="film-step__subtitle">До 30.09.2019</p>
+                            <div key={index} className={wrapperClass}>
+                                <p className={titleClass}>{step.title}</p>
+                                <p className="film-step__subtitle">{step.dateTo}</p>
                             </div>
                         )
                     })}

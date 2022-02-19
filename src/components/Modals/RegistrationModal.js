@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from "react";
-import AuthService from "../../services/auth";
+import AuthService from "../../services/AuthService";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import TwitterLogin from "react-twitter-auth";

@@ -2,11 +2,12 @@ export default class HtmlReader {
     _html = null;
     _head = null;
     _body = null;
-    targetTag = null;
     _tags = [
-        {name: 'head', control: this.head},
-        {name: 'body', control: this.body},
+        {name: 'head', value: this.head},
+        {name: 'body', value: this.body},
     ];
+    targetTag = null;
+    _customTag = null;
 
     get html() {
         return this._html;
@@ -14,6 +15,14 @@ export default class HtmlReader {
 
     set html(content) {
         this._html = content.trim();
+    }
+
+    get customTag() {
+        return this._customTag;
+    }
+
+    set customTag(content) {
+        this._customTag = content;
     }
 
     get head() {
@@ -36,28 +45,33 @@ export default class HtmlReader {
         return this._tags;
     }
 
-    constructor(htmlContent) {
+    constructor(htmlContent, customTag = null) {
         this.html = htmlContent;
+        this.customTag = customTag;
     }
 
     apply() {
+        if (this.customTag) return;
+
         this.tags.forEach((tag) => {
             this.getTagContent(tag.name);
 
-            switch (tag.name) {
-                case 'head':
-                    this.insert(tag.name, this.head);
-                    break;
-                case 'body':
-                    this.insert(tag.name, this.body);
-                    break;
+            if (tag.value) {
+                switch (tag.name) {
+                    case 'head':
+                        this.insert(tag.name, this.head);
+                        break;
+                    case 'body':
+                        this.insert(tag.name, this.body);
+                        break;
+                }
             }
         })
     }
 
     remove() {
         this.tags.forEach((tag) => {
-            if (tag.control) {
+            if (tag.value) {
                 document.querySelector(tag.name).children.forEach((child) => {
                     if (child.dataset.htmlReaderElement) {
                         child.remove();
@@ -68,7 +82,7 @@ export default class HtmlReader {
     }
 
     insert(tag, content) {
-        if (tag === 'head' || tag === 'script') {
+        if (tag === 'head') {
             return document.querySelector(tag).insertAdjacentHTML('beforeend', content);
         }
 

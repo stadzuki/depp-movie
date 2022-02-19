@@ -7,16 +7,14 @@ const initialState = {
     filmPortal: {},
     offerFilm: {
         requestion: 'individual',
+        isRequiredStepActivated: false,
         requiredInfo: {
             ru: {
-                filmName: '123',
+                filmName: '',
                 shortDescription: '',
                 detailedDescription: '',
                 budget: '',
-                staticPoster: [
-                    {fileId: '123', fileName: '11232123', fileSize: '12213213', fileResult: '12', fileType: '12'},
-                    {fileId: '1232', fileName: '5511232123', fileSize: '12213213', fileResult: '12', fileType: '12'},
-                ],
+                staticPoster: [],
                 animationPoster: [],
                 isFilmAdaption: true,
                 transferDocuments: []
@@ -26,9 +24,7 @@ const initialState = {
                 shortDescription: '',
                 detailedDescription: '',
                 budget: '',
-                staticPoster: [
-                    {fileId: '123', fileName: '122323', fileSize: '123', fileResult: '12', fileType: '12'}
-                ],
+                staticPoster: [],
                 animationPoster: [],
                 isFilmAdaption: false,
                 transferDocuments: []
@@ -38,9 +34,7 @@ const initialState = {
                 shortDescription: '',
                 detailedDescription: '',
                 budget: '',
-                staticPoster: [
-                    {fileId: '123', fileName: '123', fileSize: '123', fileResult: '12', fileType: '12'}
-                ],
+                staticPoster: [],
                 animationPoster: [],
                 isFilmAdaption: false,
                 transferDocuments: []
@@ -49,14 +43,14 @@ const initialState = {
         additionalInfo: {
             ru: {
                 videoMaterial: [],
-                videoMaterialLink: '12',
-                presentationLink: '13',
+                videoMaterialLink: '',
+                presentationLink: '',
 
-                directors: '14',
-                directorsFilmography: '15',
+                directors: '',
+                directorsFilmography: '',
 
-                screenwriters: '123',
-                screenwritersFilmography: '123',
+                screenwriters: '',
+                screenwritersFilmography: '',
 
                 operators: '',
                 operatorsFilmography: '',
@@ -74,14 +68,14 @@ const initialState = {
             },
             en: {
                 videoMaterial: [],
-                videoMaterialLink: 'en',
-                presentationLink: 'en12',
+                videoMaterialLink: '',
+                presentationLink: '',
 
-                directors: '14',
-                directorsFilmography: '15',
+                directors: '',
+                directorsFilmography: '',
 
-                screenwriters: '123',
-                screenwritersFilmography: '123',
+                screenwriters: '',
+                screenwritersFilmography: '',
 
                 operators: '',
                 operatorsFilmography: '',
@@ -99,14 +93,14 @@ const initialState = {
             },
             cn: {
                 videoMaterial: [],
-                videoMaterialLink: 'cn12',
-                presentationLink: 'cn13',
+                videoMaterialLink: '',
+                presentationLink: '',
 
-                directors: '14',
-                directorsFilmography: '15',
+                directors: '',
+                directorsFilmography: '',
 
-                screenwriters: '123',
-                screenwritersFilmography: '123',
+                screenwriters: '',
+                screenwritersFilmography: '',
 
                 operators: '',
                 operatorsFilmography: '',
@@ -124,13 +118,22 @@ const initialState = {
             },
             commonFiles: {
                 directorsFiles: [],
-                screenwritersFiles: [{fileId: '123', fileName: '1122323', fileSize: '123', fileResult: '', fileType: ''}],
-                operatorsFiles: [{fileId: '123', fileName: '2122323', fileSize: '123', fileResult: '', fileType: ''}],
-                artistsFiles: [{fileId: '123', fileName: '3122323', fileSize: '123', fileResult: '', fileType: ''}],
+                screenwritersFiles: [],
+                operatorsFiles: [],
+                artistsFiles: [],
                 actorsFiles: [],
                 producersFiles: [],
             },
         }
+    },
+    filmFilters: {
+        format: null,
+        genre: [],
+        immersion: null,
+        premiere: null
+    },
+    portalFilters: {
+        portalFilter: null
     }
 };
 
@@ -168,6 +171,22 @@ export function film(state = initialState, action) {
             return {
                 ...state,
                 offerFilm: {...state.offerFilm, payload}
+            };
+
+        case constants.FILM_FILTERS:
+            Object.assign(state.filmFilters, payload);
+
+            return {
+                ...state,
+                filmFilters: {...state.filmFilters, ...payload}
+            };
+
+        case constants.PORTAL_FILTERS:
+            Object.assign(state.portalFilters, payload);
+
+            return {
+                ...state,
+                portalFilters: {...state.portalFilters, ...payload}
             };
 
         default:

@@ -7,7 +7,7 @@ import NotFound from "./pages/NotFound";
 const Home = lazy(() => import("./pages/Home/Home"));
 const AboutFilm = lazy(() => import("./pages/AboutFilm/AboutFilm"));
 const Portal = lazy(() => import("./pages/Portal/Portal"));
-const PortalPost = lazy(() => import("./pages/PortalPost/PortalPost"));
+const PortalPost = lazy(() => import("./pages/PortalPost/PortalPost.jsx"));
 const Profile = lazy(() => import("./pages/Profile/Profile"));
 const Admin = lazy(() => import("./pages/Admin/Admin"));
 const OfferFilm = lazy(() => import("./pages/OfferFilm/OfferFilm"));
@@ -94,7 +94,8 @@ function AppRouting () {
             <Switch>
                 <Route
                     exact
-                    path="/:auth?" component={HomeWrapper}
+                    path="/:auth?"
+                    component={HomeWrapper}
                 />
                 <Route
                     path="/about_film/:id/:tab?"
@@ -105,11 +106,11 @@ function AppRouting () {
                     path="/film/:filmId/portal/"
                     render={(props) => requireAuth(PortalWrapper, props)}
                 />
-                <Route
-                    exact
-                    path="/film/:filmId/portal/post/:postId/:tab?"
-                    render={(props) => requireAuth(PortalPostWrapper, props)}
-                />
+                {/*<Route*/}
+                {/*    exact*/}
+                {/*    path="/film/:filmId/portal/post/:postId/:tab?"*/}
+                {/*    render={(props) => requireAuth(PortalPostWrapper, props)}*/}
+                {/*/>*/}
                 <Route
                     path="/user/:status?"
                     render={(props) => requireAuth(ProfileWrapper, props)}

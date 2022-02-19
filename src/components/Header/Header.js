@@ -3,7 +3,7 @@ import {useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import AuntificateModal from "../Modals/AuntificateModal";
 
-function Header ({isAuthShow}) {
+function Header ({isAuthShow, children}) {
     const isUserAuth = useSelector((store) => store.user.isAuth);
     const [isAuntificateModalShow, setAuntificateModalShow] = useState(false);
 
@@ -84,8 +84,8 @@ function Header ({isAuthShow}) {
                         </NavLink>
                     </li>
                 </ul>
-
             </header>
+            {children ? children : ''}
             {isAuntificateModalShow ? <AuntificateModal onCloseModal={setAuntificateModalShow}/> : ''}
         </>
     );

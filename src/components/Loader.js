@@ -3,7 +3,7 @@ function Loader () {
         <div className="loader-wrapper">
             <div className="overlay"></div>
             <div className="loader">
-                <img src="/img/loader.svg" alt="loading..." width="200" height="200"/>
+                <img src="/img/loader.svg" width="83" height="83"/>
             </div>
         </div>
     )

@@ -4,7 +4,11 @@ export default function decodeString (string) {
 
         const textarea = document.createElement('textarea')
         textarea.innerHTML = string;
-        return textarea.value;
+
+        const keepDecodeValue = textarea.value;
+        textarea.remove();
+
+        return keepDecodeValue;
     }
 
     return string

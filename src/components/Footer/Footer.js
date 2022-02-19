@@ -6,16 +6,16 @@ import {useEffect, useRef} from "react";
 function Footer () {
     const footerRef = useRef();
 
-    useEffect(() => {
-        const htmlNode = document.querySelector('html');
-        const rootNode = document.querySelector('#root');
-
-        if (htmlNode.clientHeight > rootNode.clientHeight) {
-            footerRef.current.classList.add('footer--sticky');
-        } else {
-            footerRef.current.classList.remove('footer--sticky');
-        }
-    })
+    // useEffect(() => {
+    //     const htmlNode = document.querySelector('html');
+    //     const rootNode = document.querySelector('#root');
+    //
+    //     if (htmlNode.clientHeight > rootNode.clientHeight) {
+    //         footerRef.current.classList.add('footer--sticky');
+    //     } else {
+    //         footerRef.current.classList.remove('footer--sticky');
+    //     }
+    // })
 
     return (
         <footer ref={footerRef} className="footer main-container">

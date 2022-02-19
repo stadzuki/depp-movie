@@ -5,12 +5,14 @@ import * as userActions from "../../../../store/actions/user";
 import DpInput from "../../../../components/Input/DpInput";
 
 import "./profile-data.scss"
+import LoaderService from "../../../../services/LoaderService";
 
 function ProfileData () {
     const dispatch = useDispatch();
     const userProfileData = useSelector((store) => store.user.profileData);
 
     const [errorMessage, setErrorMessage] = useState('');
+    const [formErrors, setFormErrors] = useState([]);
 
     // Response for displaying editor mode
     const [isUserDataEdit, setUserDataEdit] = useState(false);
@@ -51,7 +53,6 @@ function ProfileData () {
                 },
                 regex: /\w/,
                 type: 'text',
-                value: '',
                 getter: userName,
                 setter: setUserName,
                 placeholder: 'Имя и Фамилия'},
@@ -64,7 +65,6 @@ function ProfileData () {
                 },
                 regex: /\w/,
                 type: 'text',
-                value: '',
                 getter: userPhone,
                 setter: setUserPhone,
                 placeholder: 'Телефон'
@@ -78,7 +78,6 @@ function ProfileData () {
                         width: 1002
                     }
                 },
-                value: '',
                 getter: newAddressTitle,
                 setter: setNewAddressTitle,
                 placeholder: 'Название адреса'},
@@ -89,7 +88,6 @@ function ProfileData () {
                         width: 318
                     }
                 },
-                value: '',
                 getter: userCountry,
                 setter: setUserCountry,
                 placeholder: 'Страна',
@@ -103,7 +101,7 @@ function ProfileData () {
                 },
                 regex: /\w/,
                 type: 'text',
-                value: '', getter: userStreet,
+                getter: userStreet,
                 setter: setUserStreet,
                 placeholder: 'Улица'},
             {
@@ -115,7 +113,7 @@ function ProfileData () {
                 },
                 regex: /\w/,
                 type: 'text',
-                value: '', getter: userZipcode,
+                getter: userZipcode,
                 setter: setUserZipcode,
                 placeholder: 'Почтовый индекс'},
             {
@@ -127,7 +125,7 @@ function ProfileData () {
                 },
                 regex: /\w/,
                 type: 'text',
-                value: '', getter: userCity,
+                getter: userCity,
                 setter: setUserCity,
                 placeholder: 'Город'},
             {
@@ -139,7 +137,6 @@ function ProfileData () {
                 },
                 regex: /\w/,
                 type: 'text',
-                value: '',
                 getter: userHome,
                 setter: setUserHome,
                 placeholder: 'Дом'},
@@ -152,7 +149,6 @@ function ProfileData () {
                 },
                 regex: /\w/,
                 type: 'text',
-                value: '',
                 getter: userHomeNumber,
                 setter: setUserHomeNumber,
                 placeholder: 'Квартира'}
@@ -167,7 +163,6 @@ function ProfileData () {
                 },
                 regex: /\w/,
                 type: 'password',
-                value: '',
                 getter: userOldPassword,
                 setter: setUserOldPassword,
                 placeholder: 'Текущий пароль'},
@@ -180,7 +175,6 @@ function ProfileData () {
                 },
                 regex: /\w/,
                 type: 'password',
-                value: '',
                 getter: userNewPassword,
                 setter: setUserNewPassword,
                 placeholder: 'Новый пароль'}
@@ -195,9 +189,11 @@ function ProfileData () {
             return;
         }
 
+        LoaderService.show(true);
         UserService.getUserProfileData()
             .then((response) => {
                 dispatch(userActions.updateUserProfileData(response.data));
+                LoaderService.show(false);
             })
             .catch((error) => {
                 console.error('cannot get user profile data', error)
@@ -205,8 +201,8 @@ function ProfileData () {
     }, []);
 
     useEffect(() => {
-        loadProfileInputsData();
-        loadProfileAddresses();
+        // loadProfileInputsData();
+        // loadProfileAddresses();
     }, [userProfileData])
 
     function loadProfileInputsData () {
@@ -220,10 +216,10 @@ function ProfileData () {
 
         userData.map((data) => {
            if (data.id === 'user-name') {
-               data.value = userProfileData.userData?.fio || '';
+               data.setter(userProfileData.userData?.fio || '');
            }
             if (data.id === 'user-phone') {
-                data.value = userProfileData.userData?.phone || '';
+                data.setter(userProfileData.userData?.phone || '');
             }
         });
 
@@ -416,12 +412,12 @@ function ProfileData () {
                                     <DpInput
                                         styles={input.styles}
                                         inputId={input.id}
-                                        inputValue={input.value}
                                         regex={input.regex}
                                         type={input.type}
                                         getter={input.getter}
                                         setter={input.setter}
                                         placeholder={input.placeholder}
+                                        errorStack={setFormErrors}
                                     />
                                 </div>
                             ))}
@@ -477,12 +473,12 @@ function ProfileData () {
                                     <DpInput
                                         styles={input.styles}
                                         inputId={input.id}
-                                        inputValue={input.value}
                                         regex={input.regex}
                                         type={input.type}
                                         getter={input.getter}
                                         setter={input.setter}
                                         placeholder={input.placeholder}
+                                        errorStack={setFormErrors}
                                     />
                                 </div>
                             ))}
@@ -529,12 +525,12 @@ function ProfileData () {
                                 <DpInput
                                     styles={input.styles}
                                     inputId={input.id}
-                                    inputValue={input.value}
                                     regex={input.regex}
                                     type={input.type}
                                     getter={input.getter}
                                     setter={input.setter}
                                     placeholder={input.placeholder}
+                                    errorStack={setFormErrors}
                                 />
                             </div>
                         ))}

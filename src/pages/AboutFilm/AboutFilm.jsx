@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import * as filmActions from "../../store/actions/film"
-import FilmService from "../../services/film";
+import FilmService from "../../services/FilmService";
 
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -9,6 +9,7 @@ import FilmInfo from "./components/FilmInfo/FilmInfo";
 import DescriptionTabCtrl from "../../components/DescriptionTabCtrl/DescriptionTabCtrl";
 
 import "./about-film.scss";
+import LoaderService from "../../services/LoaderService";
 
 function AboutFilm (props) {
     const filmId = props.match.params.id || -1;
@@ -18,15 +19,16 @@ function AboutFilm (props) {
 
     useEffect(() => {
         if (filmInfo[filmId]) return;
+        LoaderService.show(true);
 
         FilmService.getFilm(filmId)
             .then((response) => {
                 dispatch(filmActions.addFIlmInfo({id: response.data.id, data: response.data}))
+                LoaderService.show(false);
             })
             .catch((error) => {
-                // props.history.push('/404');
                 console.error('cannot load film info', error)
-            });
+            })
     }, [])
 
     return (

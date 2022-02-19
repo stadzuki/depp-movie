@@ -11,8 +11,6 @@ function FilmCard () {
     const [isTextExpand, setTextExpand] = useState(true);
     const [isFilmStepShow, setFilmStepShow] = useState(false);
 
-    // const currentFilm = {id: 1, description: "История об отважном львенке по имени Симба. Знакомые с детства герои взрослеют, влюбляются, познают себя и окружающий мир, совершают ошибки и делают правильный выбор История об отважном львенке по имени Симба. Знакомые с детства герои взрослеют, влюбляются, познают себя и окружающий мир, совершают ошибки и делают правильный выбор."}
-
     function onFilmStepClick (status) {
         setFilmStepShow(status);
     }
@@ -74,16 +72,15 @@ function FilmCard () {
                                     Подробнее
                                 </div>
                             </NavLink>
-                            <NavLink to={`film/${currentFilm.id}/portal`} className="navlink-button navlink-button--secondary-btn">
+                            <NavLink to={`/film/${currentFilm.id}/portal`} className="navlink-button navlink-button--secondary-btn">
                                 <div className="film-card__action-buttons__button film-card__action-buttons__button--extra dp-button dp-button__default dp-button__color--gray">
                                     Портал
                                 </div>
                             </NavLink>
                         </div>
-                        <div className="underline"></div>
                         <div
                             onClick={() => onFilmStepClick(true)}
-                            className="film-card__media-button film-card__media-button--fundraising dp-button__color--gray">
+                            className="film-card__media-button film-card__media-button--fundraising dp-button__color--dark-gray">
                             <div className="film-card__media-button__cache">
                                 <img src="/img/rate.svg" alt="rate" width="20" height="20"/>
                                 <p>Сбор средств</p>
@@ -116,7 +113,7 @@ function FilmCard () {
                                     Подробнее
                                 </div>
                             </NavLink>
-                            <NavLink className="navlink-button" to={`film/${currentFilm.id}/portal/`}>
+                            <NavLink className="navlink-button" to={`film/${currentFilm.id}/portal`}>
                                 <div
                                     className="film-card__action-buttons__button film-card__action-buttons__button--extra dp-button dp-button__default dp-button__color--gray">
                                     Портал
@@ -138,7 +135,7 @@ function FilmCard () {
                         </div>
                         <div
                             onClick={() => onFilmStepClick(true)}
-                            className={`film-card__media-button film-card__media-button--fundraising dp-button__color--gray ${filmViewState === 'single' ? 'hide' : ''}`}>
+                            className={`film-card__media-button film-card__media-button--fundraising dp-button__color--dark-gray ${filmViewState === 'single' ? 'hide' : ''}`}>
                             <div className="film-card__media-button__cache">
                                 <img src="/img/rate.svg" alt="rate" width="20" height="20"/>
                                 <p>Сбор средств</p>

@@ -1,13 +1,5 @@
-import CountryTab from "../../CountryTab/CountryTab";
-import DpInput from "../../Input/DpInput";
-import DpTextArea from "../../TextArea/DpTextArea";
-import DpUploadFile from "../../UploadFile/DpUploadFile";
-import CheckBox from "../../CheckBox/CheckBox";
-import {useState} from "react";
-
 function OfferAlmostDone ({offerInfo, loadPreviousStep}) {
     const requiredInfo = offerInfo.requiredInfo;
-    const [leftToField, setLeftToField] = useState({ru: null, en: null, cn: null});
 
     function goToPreviousStep (evt) {
         evt.preventDefault();
@@ -56,6 +48,7 @@ function OfferAlmostDone ({offerInfo, loadPreviousStep}) {
                         return generateLeftFields(requiredInfo[key].errors, key)
                     } else return '';
                 })}
+                {!offerInfo.isRequiredStepActivated ? <p style={{marginTop: 10}}>Необходимо заполнить страницу <em>"Обязательные материалы"</em></p> : ''}
                 <p className="offer-content__block__subtitle mt-40">Если у вас не хватает обязательных материалов или вы хотели бы расширить список материалов для большей привлекательности проекта вы можете обратиться к специалистам Deep.movie (платная услуга) или в сообщество Фанлаб (бесплатная услуга)</p>
             </div>
             <div className="offer-content__separator"></div>
